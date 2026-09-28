@@ -74,7 +74,6 @@ export function SettlementLoop({ compact = false, locale = 'fa' }: { compact?: b
 
       <span dir="ltr" className="float-amount absolute start-5 top-7 rounded-full border border-line/80 bg-surface/80 px-3 py-1.5 text-[11px] font-semibold tabular-nums shadow-sm backdrop-blur">+$45</span>
       <span dir="ltr" className="float-amount float-amount-two absolute bottom-6 end-5 rounded-full border border-line/80 bg-surface/80 px-3 py-1.5 text-[11px] font-semibold tabular-nums shadow-sm backdrop-blur">−$35</span>
-      <div className="absolute inset-x-0 bottom-3 text-center text-[9px] font-medium tracking-[0.12em] text-muted/70">{locale === 'fa' ? 'بدهی‌ها ساده می‌شوند' : 'balances converge'}</div>
     </div>
   );
 }

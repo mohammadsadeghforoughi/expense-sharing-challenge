@@ -306,7 +306,7 @@ The 64px sticky header uses a translucent canvas, backdrop blur, and a softened 
 
 ### Settlement Network
 
-The hero’s 340px × 280px luminous card contains four circular people nodes around two concentric rings. Three SVG payment particles travel independent curved paths: blue across the upper arc, green across the lower arc, and coral through the middle. Floating `+$45` and `−$35` chips drift on opposite corners while the 106px center breathes around a checkmark, `$0`, and localized **تسویه / settled** microcopy. A second localized line—**بدهی‌ها ساده می‌شوند / balances converge**—anchors the card’s purpose. The network is explanatory product identity, not a generic dashboard chart, and all particles, ring rotation, chip drift, and core breathing become static under reduced motion.
+The hero’s 340px × 280px luminous card contains four circular people nodes around two concentric rings. Three SVG payment particles travel independent curved paths: blue across the upper arc, green across the lower arc, and coral through the middle. Floating `+$45` and `−$35` chips drift on opposite corners while the 106px center breathes around a checkmark, `$0`, and localized **تسویه / settled** microcopy. The network is explanatory product identity, not a generic dashboard chart, and all particles, ring rotation, chip drift, and core breathing become static under reduced motion.
 
 ### Product Loader
 
