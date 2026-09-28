@@ -62,4 +62,20 @@ describe('ExpensesService', () => {
       }),
     ]);
   });
+
+  it('clears expenses without deleting seeded users', () => {
+    service.create({ payerId: 'alice', beneficiaryId: 'bob', amount: 25, description: 'Lunch' });
+
+    expect(service.clear()).toEqual({ deletedCount: 1 });
+    expect(service.findAll()).toEqual([]);
+    expect(database.db.prepare('SELECT COUNT(*) AS count FROM users').get()).toEqual({ count: 4 });
+
+    database.onModuleDestroy();
+    database = new DatabaseService();
+    database.onModuleInit();
+    service = new ExpensesService(database);
+
+    expect(service.findAll()).toEqual([]);
+    expect(database.db.prepare('SELECT COUNT(*) AS count FROM users').get()).toEqual({ count: 4 });
+  });
 });

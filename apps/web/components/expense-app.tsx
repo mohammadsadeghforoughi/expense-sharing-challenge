@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Check, ReceiptText, RotateCw, Scale, X } from 'lucide-react';
+import { ArrowRight, Check, ReceiptText, RotateCw, Scale, Trash2, X } from 'lucide-react';
 import { FormEvent, KeyboardEvent as ReactKeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { api } from '@/lib/api';
@@ -24,7 +24,12 @@ export function ExpenseApp() {
   const [initializing, setInitializing] = useState(true);
   const [error, setError] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [clearDialogOpen, setClearDialogOpen] = useState(false);
+  const [clearing, setClearing] = useState(false);
+  const [actionError, setActionError] = useState('');
+  const [actionMessage, setActionMessage] = useState('');
   const addExpenseButtonRef = useRef<HTMLButtonElement>(null);
+  const clearExpensesButtonRef = useRef<HTMLButtonElement>(null);
   const t = getMessages(locale);
 
   const loadData = useCallback(async (initial = false) => {
@@ -58,6 +63,7 @@ export function ExpenseApp() {
 
   async function handleCreated() {
     setModalOpen(false);
+    setActionMessage('');
     await loadData();
     setView('expenses');
     requestAnimationFrame(() => addExpenseButtonRef.current?.focus());
@@ -68,12 +74,34 @@ export function ExpenseApp() {
     requestAnimationFrame(() => addExpenseButtonRef.current?.focus());
   }
 
+  const closeClearDialog = useCallback(() => {
+    setClearDialogOpen(false);
+    setActionError('');
+    requestAnimationFrame(() => clearExpensesButtonRef.current?.focus());
+  }, []);
+
   function handleTabKeyDown(event: ReactKeyboardEvent<HTMLButtonElement>) {
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
     event.preventDefault();
     const nextView: View = event.key === 'ArrowRight' ? 'balances' : 'expenses';
     setView(nextView);
     requestAnimationFrame(() => document.getElementById(`ledger-tab-${nextView}`)?.focus());
+  }
+
+  async function clearExpenses() {
+    setClearing(true);
+    setActionError('');
+    setActionMessage('');
+    try {
+      await api.clearExpenses();
+      await loadData();
+      setActionMessage(t.clearSuccess);
+      closeClearDialog();
+    } catch {
+      setActionError(t.clearError);
+    } finally {
+      setClearing(false);
+    }
   }
 
   return (
@@ -106,7 +134,21 @@ export function ExpenseApp() {
           <h2 className="text-2xl font-semibold tracking-[-0.025em]">
             {view === 'expenses' ? t.ledgerTitle : t.balanceTitle}
           </h2>
-          <div className="inline-flex self-start rounded-full bg-ink/[0.055] p-1 dark:bg-white/[0.07]" role="tablist" aria-label={t.ledgerViewLabel}>
+          <div className="flex flex-wrap items-center gap-2 self-start">
+            <button
+              ref={clearExpensesButtonRef}
+              type="button"
+              onClick={() => {
+                setActionError('');
+                setClearDialogOpen(true);
+              }}
+              disabled={loading || clearing || expenses.length === 0}
+              className="inline-flex h-10 items-center gap-2 rounded-full px-3 text-sm font-medium text-red-700 transition-colors hover:bg-red-500/10 disabled:cursor-not-allowed disabled:opacity-40 dark:text-red-300"
+            >
+              <Trash2 className="h-4 w-4" aria-hidden="true" />
+              {clearing ? t.clearingExpenses : t.clearExpenses}
+            </button>
+            <div className="inline-flex rounded-full bg-ink/[0.055] p-1 dark:bg-white/[0.07]" role="tablist" aria-label={t.ledgerViewLabel}>
             <button
               id="ledger-tab-expenses"
               type="button"
@@ -135,8 +177,12 @@ export function ExpenseApp() {
               {t.balances}
               {!loading && <span className="ms-2 tabular-nums text-muted">{balances.length}</span>}
             </button>
+            </div>
           </div>
         </div>
+
+        {actionError && <p role="alert" className="mt-4 text-sm text-red-700 dark:text-red-300">{actionError}</p>}
+        {actionMessage && <p role="status" className="sr-only">{actionMessage}</p>}
 
         <div id="ledger-panel" className="mt-6 min-h-80" role="tabpanel" aria-labelledby={`ledger-tab-${view}`}>
           {loading && <LoadingState label={t.loading} />}
@@ -165,8 +211,92 @@ export function ExpenseApp() {
           onCreated={handleCreated}
         />
       )}
+      {clearDialogOpen && (
+        <ClearExpensesDialog
+          locale={locale}
+          clearing={clearing}
+          error={actionError}
+          onClose={closeClearDialog}
+          onConfirm={clearExpenses}
+        />
+      )}
       </main>
     </>
+  );
+}
+
+function ClearExpensesDialog({ locale, clearing, error, onClose, onConfirm }: {
+  locale: Locale;
+  clearing: boolean;
+  error: string;
+  onClose: () => void;
+  onConfirm: () => Promise<void>;
+}) {
+  const t = getMessages(locale);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const confirmRef = useRef<HTMLButtonElement>(null);
+  const clearingRef = useRef(clearing);
+
+  useEffect(() => {
+    clearingRef.current = clearing;
+  }, [clearing]);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    const background = Array.from(document.querySelectorAll<HTMLElement>('header, main'));
+    document.body.style.overflow = 'hidden';
+    background.forEach((element) => {
+      element.inert = true;
+      element.setAttribute('aria-hidden', 'true');
+    });
+    confirmRef.current?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && !clearingRef.current) onClose();
+      if (event.key !== 'Tab') return;
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled])');
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      background.forEach((element) => {
+        element.inert = false;
+        element.removeAttribute('aria-hidden');
+      });
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <div className="fixed inset-0 z-50 grid place-items-end bg-black/45 backdrop-blur-[2px] sm:place-items-center sm:p-6" onMouseDown={(event) => event.target === event.currentTarget && !clearing && onClose()}>
+      <div ref={dialogRef} role="alertdialog" aria-modal="true" aria-labelledby="clear-expenses-title" aria-describedby="clear-expenses-detail" className="animate-modal-in w-full bg-surface px-5 pb-6 pt-5 shadow-modal sm:max-w-md sm:rounded-2xl sm:p-6">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 id="clear-expenses-title" className="text-xl font-semibold tracking-[-0.02em]">{t.clearDialogTitle}</h2>
+            <p id="clear-expenses-detail" className="mt-2 text-sm leading-6 text-muted">{t.clearDialogDetail}</p>
+          </div>
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-red-500/10 text-red-700 dark:text-red-300" aria-hidden="true">
+            <Trash2 className="h-5 w-5" />
+          </span>
+        </div>
+        {error && <p role="alert" className="mt-4 rounded-xl bg-red-500/10 px-4 py-3 text-sm text-red-700 dark:text-red-300">{error}</p>}
+        <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          <button type="button" onClick={onClose} disabled={clearing} className="h-11 rounded-full px-5 text-sm font-medium text-muted transition-colors hover:bg-ink/[0.055] hover:text-ink disabled:opacity-40 dark:hover:bg-white/[0.08]">{t.cancel}</button>
+          <button ref={confirmRef} type="button" onClick={() => void onConfirm()} disabled={clearing} className="h-11 rounded-full bg-red-600 px-5 text-sm font-medium text-white transition-colors hover:bg-red-700 disabled:cursor-wait disabled:opacity-60">{clearing ? t.clearingExpenses : t.clearConfirmAction}</button>
+        </div>
+      </div>
+    </div>,
+    document.body,
   );
 }
 

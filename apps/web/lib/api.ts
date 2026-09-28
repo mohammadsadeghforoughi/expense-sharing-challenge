@@ -26,4 +26,5 @@ export const api = {
     amount: number;
     description: string;
   }) => request<Expense>('/expenses', { method: 'POST', body: JSON.stringify(payload) }),
+  clearExpenses: () => request<{ deletedCount: number }>('/expenses', { method: 'DELETE' }),
 };

@@ -73,6 +73,11 @@ export class ExpensesService {
     return this.mapExpense(row);
   }
 
+  clear(): { deletedCount: number } {
+    const result = this.database.db.prepare('DELETE FROM expenses').run();
+    return { deletedCount: result.changes };
+  }
+
   getBalances(): Balance[] {
     const users = this.database.db
       .prepare('SELECT id, name, initials, color FROM users')

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-28T13:22:47Z",
+  "generatedAt": "2026-09-28T13:31:05Z",
   "title": "Design System: Settle",
   "extensions": {
     "colorMeta": {
@@ -127,7 +127,7 @@
       "label": { "displayName": "Label", "purpose": "Buttons, tabs, fields, utility controls, and navigation." }
     },
     "shadows": [
-      { "name": "modal-lift", "value": "0 24px 64px -24px rgba(0, 0, 0, 0.28)", "purpose": "Broad ambient separation for the add-expense dialog only." },
+      { "name": "modal-lift", "value": "0 24px 64px -24px rgba(0, 0, 0, 0.28)", "purpose": "Broad ambient separation for temporary dialogs, including destructive confirmation." },
       { "name": "create-glow", "value": "0 8px 24px -12px rgba(34, 113, 246, 0.85)", "purpose": "Restrained blue presence beneath the primary create action." },
       { "name": "selected-tab", "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)", "purpose": "Minimal lift for the selected item inside a segmented control." },
       { "name": "flow-chip", "value": "0 4px 16px -12px rgba(0, 0, 0, 0.45)", "purpose": "Barely perceptible separation for architecture flow nodes." },
@@ -215,12 +215,12 @@
       "css": ".ds-balance-row { display:flex; align-items:center; gap:20px; border-block:1px solid rgb(var(--line, 224 224 221)); padding:24px 0; color:rgb(var(--ink, 28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-avatar-pair { display:flex; margin-inline-end:4px; } .ds-avatar-pair .ds-avatar { display:grid; width:40px; height:40px; place-items:center; border-radius:999px; color:#fff; font-size:12px; font-weight:600; } .ds-avatar-pair .ds-avatar + .ds-avatar { margin-inline-start:-8px; box-shadow:0 0 0 4px rgb(var(--canvas, 247 247 245)); } .ds-debtor { background:#d97706; } .ds-creditor { background:#2563eb; } .ds-balance-row p { min-width:0; flex:1; margin:0; font-size:16px; } .ds-balance-row p strong { font-weight:600; } .ds-balance-row p span { margin-inline:6px; color:rgb(var(--muted, 99 99 104)); } .ds-balance-row data { flex:none; font-size:20px; font-weight:600; letter-spacing:-.015em; font-variant-numeric:tabular-nums; text-align:end; }"
     },
     {
-      "name": "Test Scenario Row",
+      "name": "Clear Expenses Alert Dialog",
       "kind": "custom",
-      "refersTo": "scenario-row",
-      "description": "A bottom-of-page proof row that aligns the debt input with a check-marked final-payment result.",
-      "html": "<article class=\"ds-scenario\" dir=\"rtl\"><strong>بدهی دوطرفه</strong><span class=\"ds-scenario-input\">باب ۴۵ دلار به آلیس بدهکار است · آلیس ۳۵ دلار به باب</span><span class=\"ds-scenario-result\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\"/></svg>باب ۱۰ دلار به آلیس می‌دهد</span></article>",
-      "css": ".ds-scenario { display:grid; grid-template-columns:160px minmax(0,1fr) auto; align-items:center; gap:24px; border-block:1px solid rgb(var(--line,224 224 221)); padding:20px 0; color:rgb(var(--ink,28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-scenario > strong { font-size:16px; font-weight:600; } .ds-scenario-input { color:rgb(var(--muted,99 99 104)); font-size:14px; line-height:1.5; } .ds-scenario-result { display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; } .ds-scenario-result svg { width:16px; height:16px; fill:none; stroke:rgb(var(--accent,34 113 246)); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; } @media (max-width:639px) { .ds-scenario { grid-template-columns:1fr; gap:12px; } }"
+      "refersTo": "button-destructive",
+      "description": "A localized in-app alertdialog for permanent expense deletion: explicit title and detail, red trash icon, Cancel and Delete all expenses actions, centered desktop presentation and mobile bottom sheet. It makes the background inert, traps and restores focus, permits Escape or backdrop dismissal only while idle, locks during loading, shows failure inline, deletes expenses, and preserves seeded users.",
+      "html": "<div class=\"ds-clear-scene\" dir=\"rtl\"><div class=\"ds-clear-page\" aria-hidden=\"true\"><button class=\"ds-clear-trigger\" type=\"button\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 6h18M8 6V4h8v2m-9 0 1 14h8l1-14M10 11v5m4-5v5\"/></svg><span>پاک کردن هزینه‌ها</span></button></div><div class=\"ds-clear-backdrop\"><section class=\"ds-clear-dialog\" role=\"alertdialog\" aria-modal=\"true\" aria-labelledby=\"ds-clear-title\" aria-describedby=\"ds-clear-detail\"><header><div><h2 id=\"ds-clear-title\">همه هزینه‌ها پاک شوند؟</h2><p id=\"ds-clear-detail\">همه هزینه‌ها برای همیشه پاک می‌شوند. کاربران باقی می‌مانند.</p></div><span class=\"ds-danger-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\"><path d=\"M3 6h18M8 6V4h8v2m-9 0 1 14h8l1-14M10 11v5m4-5v5\"/></svg></span></header><p class=\"ds-clear-error\" role=\"alert\">هزینه‌ها پاک نشدند. دوباره تلاش کنید.</p><footer><button class=\"ds-clear-cancel\" type=\"button\">انصراف</button><button class=\"ds-clear-confirm\" type=\"button\">پاک کردن همه هزینه‌ها</button></footer></section></div></div>",
+      "css": ".ds-clear-scene { position:relative; min-height:360px; overflow:hidden; background:rgb(var(--canvas,247 247 245)); color:rgb(var(--ink,28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-clear-page { padding:20px; } .ds-clear-trigger { display:inline-flex; height:40px; align-items:center; gap:8px; border:0; border-radius:999px; padding:0 12px; background:transparent; color:rgb(185 28 28); font:500 14px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-clear-trigger svg,.ds-danger-icon svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; } .ds-clear-backdrop { position:absolute; inset:0; display:grid; place-items:center; padding:24px; background:rgb(0 0 0/.45); backdrop-filter:blur(2px); } .ds-clear-dialog { width:min(100%,448px); border-radius:16px; padding:24px; background:rgb(var(--surface,255 255 255)); box-shadow:0 24px 64px -24px rgba(0,0,0,.28); animation:ds-clear-in 360ms cubic-bezier(.16,1,.3,1) both; } .ds-clear-dialog header { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; } .ds-clear-dialog h2 { margin:0; font-size:20px; font-weight:600; line-height:1.4; letter-spacing:-.02em; } .ds-clear-dialog header p { margin:8px 0 0; color:rgb(var(--muted,99 99 104)); font-size:14px; line-height:1.7; } .ds-danger-icon { display:grid; width:40px; height:40px; flex:none; place-items:center; border-radius:999px; background:rgb(239 68 68/.1); color:rgb(185 28 28); } .ds-danger-icon svg { width:20px; height:20px; } .ds-clear-error { margin:16px 0 0; border-radius:12px; padding:12px 16px; background:rgb(239 68 68/.1); color:rgb(185 28 28); font-size:14px; } .ds-clear-dialog footer { display:flex; justify-content:flex-end; gap:8px; margin-top:24px; } .ds-clear-dialog footer button { height:44px; border:0; border-radius:999px; padding:0 20px; font:500 14px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; cursor:pointer; } .ds-clear-cancel { background:transparent; color:rgb(var(--muted,99 99 104)); } .ds-clear-cancel:hover { background:rgb(var(--ink,28 28 30)/.055); color:rgb(var(--ink,28 28 30)); } .ds-clear-confirm { background:#dc2626; color:#fff; } .ds-clear-confirm:hover { background:#b91c1c; } .ds-clear-dialog button:focus-visible { outline:3px solid rgb(var(--accent,34 113 246)/.45); outline-offset:2px; } .ds-clear-dialog button:disabled { cursor:wait; opacity:.6; } @keyframes ds-clear-in { from { opacity:0; transform:translateY(16px) scale(.98); } to { opacity:1; transform:none; } } @media (max-width:639px) { .ds-clear-backdrop { place-items:end; padding:0; } .ds-clear-dialog { width:100%; border-radius:0; padding:20px 20px 24px; } .ds-clear-dialog footer { flex-direction:column-reverse; } } @media (prefers-reduced-motion:reduce) { .ds-clear-dialog { animation-duration:.01ms; } }"
     },
     {
       "name": "Ledger Text Field",
@@ -256,6 +256,7 @@
       { "name": "The One Blue Action Rule", "body": "Blue identifies creation, focus, and the occasional informational cue; it must not become a general decoration or compete across multiple actions.", "section": "colors" },
       { "name": "The Light-First Theme Pair Rule", "body": "Light is the default state, but every semantic neutral and accent must still consume its dark-theme pair; never hard-code a light neutral into a dark surface.", "section": "colors" },
       { "name": "The Illustration Color Containment Rule", "body": "The coral, blue, green, and violet node colors belong to the settlement network and avatars; do not spread them into navigation, buttons, or decorative page chrome.", "section": "colors" },
+      { "name": "The Destructive Red Rule", "body": "Red is reserved for failure and the explicit clear-expenses action; never use it for neutral navigation, ordinary emphasis, or reversible filters.", "section": "colors" },
       { "name": "The One Typeface Rule", "body": "Keep English, Persian, labels, amounts, and narrative text in Anjoman; hierarchy comes from scale, weight, spacing, and color rather than a second typeface.", "section": "typography" },
       { "name": "The Financial Numeral Rule", "body": "Amounts and count-bearing UI use tabular numerals so changing values never disturb alignment.", "section": "typography" },
       { "name": "The One Shadowed Phrase Rule", "body": "Only the hero’s outcome phrase receives the small blue line-shadow; never apply the effect to an entire heading or repeat it elsewhere on the page.", "section": "typography" },
@@ -270,6 +271,7 @@
       "Do use dividers, whitespace, and type hierarchy to structure the ledger.",
       "Do begin an unsaved visit in Persian RTL and light mode, then preserve explicit user choices.",
       "Do test every responsive state, motion state, and directional connector in both English LTR and Persian RTL.",
+      "Do require the localized in-app alertdialog before clearing expenses, lock every dismissal path while deletion runs, and keep seeded users intact after success.",
       "Do preserve visible focus, semantic labels, keyboard tab behavior, focus trapping, and reduced-motion handling."
     ],
     "donts": [
@@ -277,6 +279,7 @@
       "Don't use blue for active navigation, decorative emphasis, or competing secondary actions.",
       "Don't abbreviate debt direction into an ambiguous signed number or color-only indicator.",
       "Don't call the computed group-wide result a balance when the user-facing concept is a final payment.",
+      "Don't enable clear expenses while loading, clearing, or empty; never let the alertdialog lose its focus trap or close mid-deletion; and never delete seeded users with that action.",
       "Don't animate lists, settlement-network particles, loader orbits, or theme-icon morphs when reduced motion is requested.",
       "Don't introduce a second typeface, gratuitous gradients, heavy shadows, or glossy decoration.",
       "Don't implement RTL by mechanically mirroring every icon or by using physical left/right spacing."

@@ -44,6 +44,11 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
         created_at TEXT NOT NULL DEFAULT (datetime('now')),
         CHECK(payer_id <> beneficiary_id)
       );
+
+      CREATE TABLE IF NOT EXISTS app_meta (
+        key TEXT PRIMARY KEY,
+        value TEXT NOT NULL
+      );
     `);
   }
 
@@ -63,21 +68,29 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     });
     seedUsers();
 
-    const expenseCount = this.database
-      .prepare('SELECT COUNT(*) AS count FROM expenses')
-      .get() as { count: number };
+    const exampleExpensesSeeded = this.database
+      .prepare("SELECT value FROM app_meta WHERE key = 'example_expenses_seeded'")
+      .get() as { value: string } | undefined;
 
-    if (expenseCount.count === 0) {
+    if (!exampleExpensesSeeded) {
+      const expenseCount = this.database
+        .prepare('SELECT COUNT(*) AS count FROM expenses')
+        .get() as { count: number };
       const insertExpense = this.database.prepare(`
         INSERT INTO expenses (payer_id, beneficiary_id, amount_cents, description, created_at)
         VALUES (?, ?, ?, ?, ?)
       `);
-      const seedExpenses = this.database.transaction(() => {
-        insertExpense.run('bob', 'alice', 12000, 'Weekend cabin', '2026-09-24T18:30:00.000Z');
-        insertExpense.run('alice', 'charlie', 5000, 'Concert tickets', '2026-09-22T14:10:00.000Z');
-        insertExpense.run('bob', 'david', 3000, 'Team lunch', '2026-09-20T11:45:00.000Z');
+      const seedExpensesOnce = this.database.transaction(() => {
+        if (expenseCount.count === 0) {
+          insertExpense.run('bob', 'alice', 12000, 'Weekend cabin', '2026-09-24T18:30:00.000Z');
+          insertExpense.run('alice', 'charlie', 5000, 'Concert tickets', '2026-09-22T14:10:00.000Z');
+          insertExpense.run('bob', 'david', 3000, 'Team lunch', '2026-09-20T11:45:00.000Z');
+        }
+        this.database.prepare(
+          "INSERT INTO app_meta (key, value) VALUES ('example_expenses_seeded', '1')",
+        ).run();
       });
-      seedExpenses();
+      seedExpensesOnce();
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { Balance, Expense } from './expense.entity';
@@ -21,6 +21,18 @@ export class ExpensesController {
   @ApiCreatedResponse({ type: Expense })
   create(@Body() dto: CreateExpenseDto) {
     return this.expensesService.create(dto);
+  }
+
+  @Delete('expenses')
+  @ApiOperation({ summary: 'Delete all expenses while preserving seeded users' })
+  @ApiOkResponse({
+    schema: {
+      type: 'object',
+      properties: { deletedCount: { type: 'number', example: 5 } },
+    },
+  })
+  clear() {
+    return this.expensesService.clear();
   }
 
   @Get('balances')

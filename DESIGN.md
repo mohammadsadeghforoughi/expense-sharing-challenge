@@ -105,6 +105,20 @@ components:
     rounded: "{rounded.pill}"
     padding: "0 20px"
     height: "44px"
+  button-destructive:
+    backgroundColor: "transparent"
+    textColor: "{colors.error-light}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0 12px"
+    height: "40px"
+  button-destructive-dark:
+    backgroundColor: "transparent"
+    textColor: "{colors.error-dark}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0 12px"
+    height: "40px"
   field:
     backgroundColor: "{colors.canvas-light}"
     textColor: "{colors.ink-light}"
@@ -177,8 +191,8 @@ Warm-near-neutral light surfaces and graphite dark surfaces keep the ledger calm
 
 ### Tertiary
 
-- **Error Wash:** `error-wash` provides a quiet alert surface without turning validation into a dominant panel.
-- **Error Text:** `error-light` and `error-dark` preserve readable validation copy in their respective themes.
+- **Error Wash:** `error-wash` provides a quiet hover or alert surface without turning destructive intent or validation into a dominant panel.
+- **Error Text:** `error-light` and `error-dark` preserve readable validation, action-failure copy, and the clear-expenses label in their respective themes.
 
 ### Neutral
 
@@ -195,6 +209,8 @@ Warm-near-neutral light surfaces and graphite dark surfaces keep the ledger calm
 **The Light-First Theme Pair Rule.** Light is the default state, but every semantic neutral and accent must still consume its dark-theme pair; never hard-code a light neutral into a dark surface.
 
 **The Illustration Color Containment Rule.** The coral, blue, green, and violet node colors belong to the settlement network and avatars; do not spread them into navigation, buttons, or decorative page chrome.
+
+**The Destructive Red Rule.** Red is reserved for failure and the explicit clear-expenses action; never use it for neutral navigation, ordinary emphasis, or reversible filters.
 
 ## Typography
 
@@ -263,6 +279,7 @@ Geometry is soft but disciplined. Action buttons, tabs, avatars, icon controls, 
 - **Primary:** Action Blue with high-contrast light text, medium-weight labeling, and 24px horizontal padding. The page-level create button is 48px tall; dialog actions are 44px tall.
 - **Hover / Focus:** The page-level create action keeps one stable, Persian-safe label beside one directional arrow. Over 200ms, the button lifts by 2px, deepens its blue shadow, softens its background, and moves the arrow 4px in the reading direction; active returns it to rest. All controls receive the shared visible focus outline, and reduced-motion preferences collapse transition duration.
 - **Secondary / Ghost:** Ink-filled buttons are reserved for strong non-create destinations such as opening API documentation or retrying. Ghost actions use muted text and gain only a faint tonal hover surface.
+- **Destructive:** Clear expenses is a subtle 40px pill beside the ledger tabs, combining a 16px trash icon with theme-aware red text. It gains only the quiet Error Wash on hover. It is disabled with 40% opacity and a not-allowed cursor while ledger data is loading, deletion is in flight, or there are no expenses.
 
 ### Chips
 
@@ -299,6 +316,12 @@ Initial loading uses a separate 144px mark rather than shrinking the hero card. 
 
 Each row pairs a human-readable relationship with a strong, tabular amount. Expense rows lead with payer identity, description, beneficiary, and date; final-payment rows overlap debtor and creditor avatars and express the result as “[debtor] owes [creditor].” Rows enter with a 520ms rise-and-deblur animation staggered by 75ms, then remain still. The amount is always aligned to the logical end and never competes with an extra status badge.
 
+### Clear Expenses
+
+The destructive action sits immediately beside the segmented ledger tabs so its scope is visually local to the ledger. Activation opens a localized in-app `alertdialog` before any request is sent. Its explicit **Clear all expenses? / همه هزینه‌ها پاک شوند؟** title and permanent-delete detail are paired with a red trash icon, a quiet **Cancel / انصراف** action, and a red **Delete all expenses / پاک کردن همه هزینه‌ها** action. The dialog is centered with a 16px radius on desktop and becomes a full-width, edge-aligned bottom sheet on compact screens.
+
+While open, the page behind the dialog is inert and hidden from assistive technology, body scrolling is locked, initial focus moves to the destructive confirmation, and Tab remains trapped between available actions. Escape, Cancel, and backdrop activation close the dialog only while idle, after which focus returns to the clear-expenses trigger. During deletion both actions lock, backdrop and Escape dismissal are suppressed, and the destructive label changes to **Clearing… / در حال پاک کردن…** with a wait cursor. Failure keeps the dialog open and inserts a concise red `role="alert"` message inside it; success closes the dialog, restores focus, and reloads expenses plus computed final payments. The action deletes expense records only—seeded users and their identities remain available for the next entry.
+
 ### Test Scenarios
 
 The bottom test-scenario section proves group-wide cancellation with two border-led examples: reciprocal debt reduces to one final payment, while a closed three-person loop reduces to no payment. Each row aligns the scenario name, directional input, and a check-marked result; the input explicitly declares its own direction so English and Persian examples remain correct inside either page direction.
@@ -320,6 +343,7 @@ Use **Final payments** (Persian: **پرداخت‌های نهایی**) for the c
 - **Do** use dividers, whitespace, and type hierarchy to structure the ledger.
 - **Do** begin an unsaved visit in Persian RTL and light mode, then preserve explicit user choices.
 - **Do** test every responsive state, motion state, and directional connector in both English LTR and Persian RTL.
+- **Do** require the localized in-app alertdialog before clearing expenses, lock every dismissal path while deletion runs, and keep seeded users intact after success.
 - **Do** preserve visible focus, semantic labels, keyboard tab behavior, focus trapping, and reduced-motion handling.
 
 ### Don't:
@@ -328,6 +352,7 @@ Use **Final payments** (Persian: **پرداخت‌های نهایی**) for the c
 - **Don't** use blue for active navigation, decorative emphasis, or competing secondary actions.
 - **Don't** abbreviate debt direction into an ambiguous signed number or color-only indicator.
 - **Don't** call the computed group-wide result a balance when the user-facing concept is a final payment.
+- **Don't** enable clear expenses while loading, clearing, or empty; never let the alertdialog lose its focus trap or close mid-deletion; and never delete seeded users with that action.
 - **Don't** animate lists, settlement-network particles, loader orbits, or theme-icon morphs when reduced motion is requested.
 - **Don't** introduce a second typeface, gratuitous gradients, heavy shadows, or glossy decoration.
 - **Don't** implement RTL by mechanically mirroring every icon or by using physical left/right spacing.

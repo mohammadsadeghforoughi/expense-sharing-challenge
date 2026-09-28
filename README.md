@@ -48,7 +48,7 @@ Browser → Next.js web (:3000) → /api reverse proxy → NestJS API (:3001) �
 - `data` — local SQLite location; Docker uses a named volume instead.
 - `docs` — architecture, API, and deployment notes.
 
-Money is stored as integer cents. Each expense means the beneficiary owes the payer. Balances are netted within each unordered pair of users; no cross-person debt simplification is attempted because the brief asks for net balances between users.
+Money is stored as integer cents. Each expense means the beneficiary owes the payer. Final payments are simplified across every user's net position, so reciprocal debts and closed loops cancel out.
 
 ## API
 
@@ -57,6 +57,7 @@ Money is stored as integer cents. Each expense means the beneficiary owes the pa
 | `GET` | `/users` | List seeded users |
 | `GET` | `/expenses` | List expenses newest first |
 | `POST` | `/expenses` | Create a directional expense |
+| `DELETE` | `/expenses` | Delete all expenses while preserving users |
 | `GET` | `/balances` | Return simplified final payments across all users |
 | `GET` | `/health` | Container health check |
 

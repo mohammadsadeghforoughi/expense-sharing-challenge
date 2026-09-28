@@ -17,6 +17,12 @@ Interactive OpenAPI documentation is available at `/docs` on the API service and
 
 The beneficiary owes the payer. The API rejects identical users, unknown users, empty descriptions, non-positive values, more than two decimal places, and values above 1,000,000.
 
+## Clear expenses
+
+`DELETE /expenses`
+
+Deletes every expense and returns the number of deleted records. Seeded users are preserved.
+
 ## Balance response
 
 `GET /balances`

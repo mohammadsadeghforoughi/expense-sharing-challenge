@@ -31,7 +31,7 @@ The browser uses relative `/api` URLs. This avoids environment-specific public A
 
 ### Database
 
-SQLite is initialized on application startup. Schema creation is idempotent, users are inserted with `INSERT OR IGNORE`, and example expenses are added only when the expense table is empty.
+SQLite is initialized on application startup. Schema creation is idempotent, users are inserted with `INSERT OR IGNORE`, and example expenses are added only on the database's first initialization. Clearing expenses is therefore preserved across restarts.
 
 ## Balance algorithm
 
