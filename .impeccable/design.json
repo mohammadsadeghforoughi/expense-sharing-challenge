@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-28T13:13:14Z",
+  "generatedAt": "2026-09-28T13:22:47Z",
   "title": "Design System: Settle",
   "extensions": {
     "colorMeta": {
@@ -136,11 +136,11 @@
       { "name": "title-line-shadow", "value": "0.045em 0.045em 0 rgb(34 113 246 / 0.22)", "purpose": "Crisp accent echo beneath one outcome phrase in the home hero." }
     ],
     "motion": [
-      { "name": "ease-apple", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Gentle deceleration for modal entry, list arrival, loader pulse, and theme reveal." },
-      { "name": "duration-standard", "value": "300ms", "purpose": "Icon swaps and label transitions." },
-      { "name": "duration-button-fill", "value": "500ms", "purpose": "Expanding white-dot fill on the primary create action." },
+      { "name": "ease-apple", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Gentle deceleration for modal entry, list arrival, loader pulse, and control feedback." },
+      { "name": "duration-standard", "value": "300ms", "purpose": "Brand-mark and secondary-link transformations." },
+      { "name": "duration-control-motion", "value": "200ms", "purpose": "Create-button lift, shadow, and arrow travel plus sun/moon rotate-scale-fade." },
+      { "name": "duration-control-color", "value": "150ms", "purpose": "Utility-control background and text-color hover feedback." },
       { "name": "duration-modal", "value": "360ms", "purpose": "Dialog fade, rise, and subtle scale-in." },
-      { "name": "duration-theme-reveal", "value": "420ms", "purpose": "Circular view-transition reveal originating at the theme toggle." },
       { "name": "duration-list-in", "value": "520ms", "purpose": "Rise-and-deblur arrival for ledger rows." },
       { "name": "stagger-list", "value": "75ms", "purpose": "Per-row delay for ledger arrival." },
       { "name": "duration-loader-pulse", "value": "1.6s", "purpose": "Gentle pulse for the compact orbit mark during initial loading." },
@@ -165,17 +165,17 @@
       "name": "Create Expense Button",
       "kind": "button",
       "refersTo": "button-create",
-      "description": "The one blue page action; its expanding white fill reveals a directional confirmation label on hover.",
-      "html": "<button class=\"ds-btn-create\" type=\"button\"><span class=\"ds-btn-dot\" aria-hidden=\"true\"></span><span class=\"ds-btn-label\">ثبت هزینه</span><span class=\"ds-btn-reveal\">ثبت هزینه<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></span></button>",
-      "css": ".ds-btn-create { position:relative; display:inline-flex; height:48px; align-items:center; justify-content:center; overflow:hidden; border:0; border-radius:999px; padding:0 24px; background:rgb(var(--accent,34 113 246)); color:#fff; font:500 16px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; box-shadow:0 8px 24px -12px rgba(34,113,246,.85); cursor:pointer; } .ds-btn-dot { position:absolute; inset-inline-start:18px; width:8px; height:8px; border-radius:999px; background:#fff; transition:transform 500ms cubic-bezier(.16,1,.3,1); } .ds-btn-label { position:relative; transition:transform 300ms cubic-bezier(.16,1,.3,1),opacity 300ms; } .ds-btn-reveal { position:absolute; display:flex; align-items:center; gap:8px; color:rgb(var(--accent,34 113 246)); opacity:0; transform:translateX(32px); transition:transform 300ms cubic-bezier(.16,1,.3,1),opacity 300ms; } .ds-btn-reveal svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; } .ds-btn-create:hover .ds-btn-dot { transform:scale(35); } .ds-btn-create:hover .ds-btn-label { transform:translateX(32px); opacity:0; } .ds-btn-create:hover .ds-btn-reveal { transform:translateX(0); opacity:1; } .ds-btn-create:focus-visible { outline:3px solid rgb(var(--accent,34 113 246)/.45); outline-offset:2px; } @media (prefers-reduced-motion:reduce) { .ds-btn-create * { transition-duration:.01ms!important; } }"
+      "description": "The one blue page action keeps one Persian-safe label and moves only its directional arrow on hover.",
+      "html": "<button class=\"ds-btn-create\" type=\"button\"><span>ثبت هزینه</span><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></button>",
+      "css": ".ds-btn-create { display:inline-flex; height:48px; align-items:center; justify-content:center; gap:8px; border:0; border-radius:999px; padding:0 24px; background:rgb(var(--accent,34 113 246)); color:#fff; font:500 16px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; box-shadow:0 8px 24px -12px rgba(34,113,246,.85); cursor:pointer; transition:transform 200ms cubic-bezier(.16,1,.3,1),background-color 200ms,box-shadow 200ms; } .ds-btn-create svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transform:rotate(180deg); transition:transform 200ms cubic-bezier(.16,1,.3,1); } .ds-btn-create:hover { background:rgb(var(--accent,34 113 246)/.9); box-shadow:0 12px 28px -12px rgba(34,113,246,.95); transform:translateY(-2px); } .ds-btn-create:hover svg { transform:rotate(180deg) translateX(4px); } .ds-btn-create:active { transform:translateY(0); } .ds-btn-create:focus-visible { outline:3px solid rgb(var(--accent,34 113 246)/.45); outline-offset:2px; } @media (prefers-reduced-motion:reduce) { .ds-btn-create,.ds-btn-create svg { transition-duration:.01ms; } }"
     },
     {
       "name": "Header Navigation & Theme Toggle",
       "kind": "nav",
       "refersTo": "theme-toggle",
-      "description": "Surface-selected navigation beside a 44px theme control whose icon morph accompanies a circular page-theme reveal.",
-      "html": "<div class=\"ds-header-controls\"><nav class=\"ds-nav\" aria-label=\"Primary\"><a class=\"ds-nav-item ds-nav-active\" href=\"#\">هزینه‌ها</a><a class=\"ds-nav-item\" href=\"#\">درباره پروژه</a></nav><button class=\"ds-theme-toggle\" type=\"button\" aria-label=\"تغییر پوسته\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42\"/></svg></button></div>",
-      "css": ".ds-header-controls { display:flex; align-items:center; gap:6px; font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-nav { display:inline-flex; border-radius:999px; padding:4px; background:rgb(var(--ink,28 28 30)/.045); } .ds-nav-item { border-radius:999px; padding:6px 16px; color:rgb(var(--muted,99 99 104)); font-size:14px; text-decoration:none; transition:color 150ms,background-color 150ms; } .ds-nav-item:hover { color:rgb(var(--ink,28 28 30)); } .ds-nav-active { background:rgb(var(--surface,255 255 255)); color:rgb(var(--ink,28 28 30)); box-shadow:0 1px 2px rgb(0 0 0/.05); } .ds-theme-toggle { display:grid; width:44px; height:44px; place-items:center; border:0; border-radius:999px; background:transparent; color:rgb(var(--muted,99 99 104)); cursor:pointer; transition:color 150ms,background-color 150ms; } .ds-theme-toggle:hover { background:rgb(var(--ink,28 28 30)/.055); color:rgb(var(--ink,28 28 30)); } .ds-theme-toggle svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; transition:transform 300ms,opacity 300ms; } .ds-theme-toggle:hover svg { transform:rotate(22deg) scale(1.05); } .ds-header-controls :focus-visible { outline:3px solid rgb(var(--accent,34 113 246)/.45); outline-offset:2px; } @media (prefers-reduced-motion:reduce) { .ds-theme-toggle svg { transition-duration:.01ms; } }"
+      "description": "Surface-selected navigation beside a 44px theme control; theme colors apply immediately while only sun and moon icons morph.",
+      "html": "<div class=\"ds-header-controls\"><nav class=\"ds-nav\" aria-label=\"Primary\"><a class=\"ds-nav-item ds-nav-active\" href=\"#\">هزینه‌ها</a><a class=\"ds-nav-item\" href=\"#\">درباره پروژه</a></nav><button class=\"ds-theme-toggle\" type=\"button\" aria-label=\"تغییر پوسته\" aria-pressed=\"false\"><span><svg class=\"ds-sun\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42\"/></svg><svg class=\"ds-moon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z\"/></svg></span></button></div>",
+      "css": ".ds-header-controls { display:flex; align-items:center; gap:6px; font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-nav { display:inline-flex; border-radius:999px; padding:4px; background:rgb(var(--ink,28 28 30)/.045); } .ds-nav-item { border-radius:999px; padding:6px 16px; color:rgb(var(--muted,99 99 104)); font-size:14px; text-decoration:none; transition:color 150ms,background-color 150ms; } .ds-nav-item:hover { color:rgb(var(--ink,28 28 30)); } .ds-nav-active { background:rgb(var(--surface,255 255 255)); color:rgb(var(--ink,28 28 30)); box-shadow:0 1px 2px rgb(0 0 0/.05); } .ds-theme-toggle { display:grid; width:44px; height:44px; place-items:center; border:0; border-radius:999px; background:transparent; color:rgb(var(--muted,99 99 104)); cursor:pointer; transition:color 150ms,background-color 150ms; } .ds-theme-toggle:hover { background:rgb(var(--ink,28 28 30)/.055); color:rgb(var(--ink,28 28 30)); } .ds-theme-toggle > span { position:relative; display:grid; width:20px; height:20px; place-items:center; } .ds-theme-toggle svg { position:absolute; width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; transition:transform 200ms cubic-bezier(.16,1,.3,1),opacity 200ms; } .ds-sun { opacity:0; transform:rotate(-90deg) scale(.75); } .ds-moon { opacity:1; transform:rotate(0) scale(1); } .ds-theme-toggle[aria-pressed=\"true\"] .ds-sun { opacity:1; transform:rotate(0) scale(1); } .ds-theme-toggle[aria-pressed=\"true\"] .ds-moon { opacity:0; transform:rotate(90deg) scale(.75); } .ds-header-controls :focus-visible { outline:3px solid rgb(var(--accent,34 113 246)/.45); outline-offset:2px; } @media (prefers-reduced-motion:reduce) { .ds-theme-toggle svg { transition-duration:.01ms; } }"
     },
     {
       "name": "Ledger View Tabs",
@@ -248,7 +248,7 @@
       "Border-led ledger structure instead of nested cards",
       "Explicit directional relationships and tabular financial numerals",
       "A luminous settlement network plus a distinct compact orbit loader",
-      "Purposeful motion on theme, list, and create-action state changes",
+      "Purposeful 200ms control motion on theme icons and create-action feedback",
       "Pill-shaped actions and selectors with softly rounded fields and dialogs",
       "Persian/light as the default with responsive LTR/RTL and dark-theme parity"
     ],
@@ -277,7 +277,7 @@
       "Don't use blue for active navigation, decorative emphasis, or competing secondary actions.",
       "Don't abbreviate debt direction into an ambiguous signed number or color-only indicator.",
       "Don't call the computed group-wide result a balance when the user-facing concept is a final payment.",
-      "Don't animate lists, settlement-network particles, loader orbits, or theme reveals when reduced motion is requested.",
+      "Don't animate lists, settlement-network particles, loader orbits, or theme-icon morphs when reduced motion is requested.",
       "Don't introduce a second typeface, gratuitous gradients, heavy shadows, or glossy decoration.",
       "Don't implement RTL by mechanically mirroring every icon or by using physical left/right spacing."
     ]

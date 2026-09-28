@@ -264,9 +264,7 @@ function ScenarioSection({ locale }: { locale: Locale }) {
 
 function PageLoader({ label }: { label: string }) {
   useEffect(() => {
-    const background = Array.from(document.body.children).filter(
-      (element) => element.getAttribute('data-page-loader-root') !== 'true',
-    ) as HTMLElement[];
+    const background = Array.from(document.querySelectorAll<HTMLElement>('header, main'));
     background.forEach((element) => {
       element.inert = true;
       element.setAttribute('aria-hidden', 'true');
@@ -277,16 +275,13 @@ function PageLoader({ label }: { label: string }) {
     });
   }, []);
 
-  if (typeof document === 'undefined') return null;
-
-  return createPortal(
+  return (
     <div data-page-loader-root="true" className="fixed inset-0 z-[100] grid place-items-center bg-canvas px-6" role="status" aria-live="polite" aria-busy="true">
       <div className="text-center">
         <div className="loader-mark mx-auto flex justify-center"><SettlementLoop compact /></div>
         <p className="mt-1 text-sm font-medium text-muted">{label}</p>
       </div>
-    </div>,
-    document.body,
+    </div>
   );
 }
 

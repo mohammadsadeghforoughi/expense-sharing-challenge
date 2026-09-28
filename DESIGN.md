@@ -159,7 +159,7 @@ Every expense is a directional relationship, so payer, beneficiary, arrow, and a
 - Border-led ledger structure instead of nested cards
 - Explicit directional relationships and tabular financial numerals
 - A luminous settlement network plus a distinct compact orbit loader
-- Purposeful motion on theme, list, and create-action state changes
+- Purposeful 200ms control motion on theme icons and create-action feedback
 - Pill-shaped actions and selectors with softly rounded fields and dialogs
 - Persian/light as the default with responsive LTR/RTL and dark-theme parity
 
@@ -261,7 +261,7 @@ Geometry is soft but disciplined. Action buttons, tabs, avatars, icon controls, 
 
 - **Shape:** Primary, secondary, and ghost text actions are pill-shaped; icon-only controls are circular with at least a 40px target.
 - **Primary:** Action Blue with high-contrast light text, medium-weight labeling, and 24px horizontal padding. The page-level create button is 48px tall; dialog actions are 44px tall.
-- **Hover / Focus:** The page-level create action uses a white dot that expands through the button in 500ms while the original label exits and an accent-colored label/arrow enters in 300ms; translation reverses in RTL. All controls receive the shared visible focus outline, and reduced-motion preferences collapse transition duration.
+- **Hover / Focus:** The page-level create action keeps one stable, Persian-safe label beside one directional arrow. Over 200ms, the button lifts by 2px, deepens its blue shadow, softens its background, and moves the arrow 4px in the reading direction; active returns it to rest. All controls receive the shared visible focus outline, and reduced-motion preferences collapse transition duration.
 - **Secondary / Ghost:** Ink-filled buttons are reserved for strong non-create destinations such as opening API documentation or retrying. Ghost actions use muted text and gain only a faint tonal hover surface.
 
 ### Chips
@@ -285,7 +285,7 @@ Geometry is soft but disciplined. Action buttons, tabs, avatars, icon controls, 
 
 ### Navigation
 
-The 64px sticky header uses a translucent canvas, backdrop blur, and a softened bottom divider. Desktop navigation is a restrained segmented pill; the active destination is surfaced rather than colored blue. Compact navigation moves to a plain second row so destinations remain readable without crowding the brand and utility controls. Language and theme utilities use 44px circular targets. The theme icon rotates and scales over 300ms, while supported browsers reveal the new theme from the toggle’s position with a 420ms circular view transition; reduced-motion users receive an immediate swap.
+The 64px sticky header uses a translucent canvas, backdrop blur, and a softened bottom divider. Desktop navigation is a restrained segmented pill; the active destination is surfaced rather than colored blue. Compact navigation moves to a plain second row so destinations remain readable without crowding the brand and utility controls. Language and theme utilities use 44px circular targets. Theme colors apply immediately; only the sun and moon icons rotate, scale, and fade over 200ms. Reduced-motion users receive an effectively immediate icon swap.
 
 ### Settlement Network
 
@@ -328,6 +328,6 @@ Use **Final payments** (Persian: **پرداخت‌های نهایی**) for the c
 - **Don't** use blue for active navigation, decorative emphasis, or competing secondary actions.
 - **Don't** abbreviate debt direction into an ambiguous signed number or color-only indicator.
 - **Don't** call the computed group-wide result a balance when the user-facing concept is a final payment.
-- **Don't** animate lists, settlement-network particles, loader orbits, or theme reveals when reduced motion is requested.
+- **Don't** animate lists, settlement-network particles, loader orbits, or theme-icon morphs when reduced motion is requested.
 - **Don't** introduce a second typeface, gratuitous gradients, heavy shadows, or glossy decoration.
 - **Don't** implement RTL by mechanically mirroring every icon or by using physical left/right spacing.
