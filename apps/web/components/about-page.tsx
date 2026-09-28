@@ -1,14 +1,15 @@
 'use client';
 
-import { ArrowUpRight, Boxes, Cloud, Code2, Database, FileJson, Layers3 } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Boxes, Cloud, Code2, Database, FileJson, Layers3 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import type { Locale } from '@/lib/types';
 
 const copy = {
   en: {
-    title: 'A small system with clear boundaries.',
-    intro: 'This code challenge focuses on one complete path: record a directional expense, persist it, and return the correctly netted balance. The implementation stays intentionally compact so the important decisions are easy to inspect.',
+    title: 'About this code challenge',
+    intro: 'A small expense-sharing app by Mohammad Sadegh Foroughi.',
     architecture: 'Architecture',
+    flowLabel: 'System flow',
     architectureText: 'The browser talks to a Next.js application on a single public origin. Next.js proxies API requests to a private NestJS service, which owns validation, balance calculation, and the SQLite database.',
     web: 'Web interface',
     webText: 'Next.js renders the responsive bilingual interface and keeps interaction state close to the page.',
@@ -24,16 +25,17 @@ const copy = {
     openSwagger: 'Open Swagger UI',
     tradeoffs: 'Deliberate trade-offs',
     tradeoffList: [
-      'Pairwise netting is computed on read; this is simple and correct for the expected data size.',
+      'Final payments are calculated across the whole group when balances are requested.',
       'SQLite and a single API instance keep deployment reproducible without extra infrastructure.',
       'Authentication, groups, split rules, editing, and deletion are outside this focused brief.',
     ],
     flow: ['Browser', 'Next.js', 'NestJS API', 'SQLite'],
   },
   fa: {
-    title: 'سامانه‌ای کوچک با مرزهایی روشن.',
-    intro: 'این چالش کدنویسی روی یک مسیر کامل تمرکز دارد: ثبت یک هزینه جهت‌دار، ذخیره آن و نمایش بدهی خالص درست. پیاده‌سازی عمداً جمع‌وجور مانده تا تصمیم‌های اصلی به‌سادگی قابل بررسی باشند.',
+    title: 'درباره این چالش کدنویسی',
+    intro: 'یک برنامه کوچک برای تقسیم هزینه، ساخته محمدصادق فروغی.',
     architecture: 'معماری',
+    flowLabel: 'مسیر ارتباط بخش‌ها',
     architectureText: 'مرورگر از یک مبدأ عمومی با برنامه Next.js ارتباط دارد. درخواست‌های API از طریق Next.js به سرویس خصوصی NestJS می‌رسند؛ سرویسی که اعتبارسنجی، محاسبه بدهی و پایگاه داده SQLite را مدیریت می‌کند.',
     web: 'رابط وب',
     webText: 'Next.js رابط واکنش‌گرا و دوزبانه را نمایش می‌دهد و وضعیت تعامل را نزدیک به صفحه نگه می‌دارد.',
@@ -49,7 +51,7 @@ const copy = {
     openSwagger: 'باز کردن Swagger',
     tradeoffs: 'انتخاب‌های آگاهانه',
     tradeoffList: [
-      'خالص‌سازی دوطرفه هنگام خواندن محاسبه می‌شود؛ روشی ساده و درست برای اندازه داده مورد انتظار.',
+      'پرداخت‌های نهایی هنگام نمایش بدهی‌ها در کل گروه محاسبه می‌شوند.',
       'SQLite و یک نمونه API، استقرار را بدون زیرساخت اضافه قابل بازتولید نگه می‌دارند.',
       'احراز هویت، گروه‌ها، تقسیم چندنفره، ویرایش و حذف عمداً خارج از محدوده این تمرین هستند.',
     ],
@@ -58,31 +60,31 @@ const copy = {
 } as const;
 
 export function AboutPage() {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useState<Locale>('fa');
   const t = copy[locale];
 
   useEffect(() => {
-    setLocale(localStorage.getItem('settle-locale') === 'fa' ? 'fa' : 'en');
+    setLocale(localStorage.getItem('settle-locale') === 'en' ? 'en' : 'fa');
     const onLocale = (event: Event) => setLocale((event as CustomEvent<Locale>).detail);
     window.addEventListener('settle-locale', onLocale);
     return () => window.removeEventListener('settle-locale', onLocale);
   }, []);
 
   return (
-    <main className="mx-auto max-w-5xl px-5 pb-20 pt-14 sm:px-8 sm:pt-20">
-      <section className="max-w-3xl border-b border-line pb-12 sm:pb-16">
-        <h1 className="text-balance text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[1.02] tracking-[-0.04em]">{t.title}</h1>
-        <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">{t.intro}</p>
+    <main className="mx-auto max-w-5xl px-5 pb-20 pt-10 sm:px-8 sm:pt-14">
+      <section className="border-b border-line pb-8 sm:pb-10">
+        <h1 className="text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">{t.title}</h1>
+        <p className="mt-3 text-base text-muted">{t.intro}</p>
       </section>
 
-      <section className="py-12 sm:py-16">
+      <section className="py-10 sm:py-14">
         <h2 className="text-2xl font-semibold tracking-[-0.025em]">{t.architecture}</h2>
         <p className="mt-4 max-w-2xl leading-7 text-muted">{t.architectureText}</p>
-        <div className="mt-8 flex flex-wrap items-center gap-2" aria-label="System flow">
+        <div className="mt-8 flex flex-wrap items-center gap-2" aria-label={t.flowLabel}>
           {t.flow.map((item, index) => (
             <div key={item} className="flex items-center gap-2">
               <span className="rounded-full bg-surface px-4 py-2.5 text-sm font-medium shadow-[0_4px_16px_-12px_rgba(0,0,0,0.45)]">{item}</span>
-              {index < t.flow.length - 1 && <span className="text-muted" aria-hidden="true">→</span>}
+              {index < t.flow.length - 1 && <ArrowRight className={`h-4 w-4 text-muted ${locale === 'fa' ? 'rotate-180' : ''}`} aria-hidden="true" />}
             </div>
           ))}
         </div>

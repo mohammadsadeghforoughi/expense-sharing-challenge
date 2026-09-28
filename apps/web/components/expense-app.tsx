@@ -1,28 +1,33 @@
 'use client';
 
-import { ArrowRight, Plus, ReceiptText, RotateCw, Scale, X } from 'lucide-react';
+import { ArrowRight, Check, ReceiptText, RotateCw, Scale, X } from 'lucide-react';
 import { FormEvent, KeyboardEvent as ReactKeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { api } from '@/lib/api';
 import { getMessages } from '@/lib/i18n';
 import type { Balance, Expense, Locale, User } from '@/lib/types';
 import { Avatar } from './avatar';
+import { SettlementLoop } from './settlement-loop';
+import { AnimatedList } from './ui/animated-list';
+import { InteractiveHoverButton } from './ui/interactive-hover-button';
+import { LineShadowText } from './ui/line-shadow-text';
 
 type View = 'expenses' | 'balances';
 
 export function ExpenseApp() {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useState<Locale>('fa');
   const [view, setView] = useState<View>('expenses');
   const [users, setUsers] = useState<User[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [balances, setBalances] = useState<Balance[]>([]);
   const [loading, setLoading] = useState(true);
+  const [initializing, setInitializing] = useState(true);
   const [error, setError] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const addExpenseButtonRef = useRef<HTMLButtonElement>(null);
   const t = getMessages(locale);
 
-  const loadData = useCallback(async () => {
+  const loadData = useCallback(async (initial = false) => {
     setLoading(true);
     setError(false);
     try {
@@ -38,15 +43,16 @@ export function ExpenseApp() {
       setError(true);
     } finally {
       setLoading(false);
+      if (initial) setInitializing(false);
     }
   }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem('settle-locale');
-    setLocale(saved === 'fa' ? 'fa' : 'en');
+    setLocale(saved === 'en' ? 'en' : 'fa');
     const onLocale = (event: Event) => setLocale((event as CustomEvent<Locale>).detail);
     window.addEventListener('settle-locale', onLocale);
-    void loadData();
+    void loadData(true);
     return () => window.removeEventListener('settle-locale', onLocale);
   }, [loadData]);
 
@@ -71,25 +77,28 @@ export function ExpenseApp() {
   }
 
   return (
-    <main className="mx-auto min-h-[calc(100vh-4rem)] max-w-6xl px-5 pb-16 pt-14 sm:px-8 sm:pt-20">
-      <section className="flex flex-col gap-8 border-b border-line pb-10 sm:flex-row sm:items-end sm:justify-between sm:pb-12">
+    <>
+      {initializing && <PageLoader label={t.loading} />}
+      <main className="mx-auto min-h-[calc(100vh-4rem)] max-w-6xl overflow-hidden px-5 pb-10 pt-10 sm:px-8 sm:pb-14 sm:pt-16">
+      <section className="grid items-center gap-8 border-b border-line pb-10 sm:pb-12 lg:grid-cols-[minmax(0,1fr)_19rem] lg:gap-12">
         <div className="max-w-2xl">
           <h1 className="text-balance text-[clamp(2.25rem,6vw,4.75rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
-            {t.title}
+            <span className="block">{t.titleStart}</span>
+            <LineShadowText>{t.titleAccent}</LineShadowText>
           </h1>
           <p className="mt-5 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
             {t.subtitle}
           </p>
+          <InteractiveHoverButton
+            ref={addExpenseButtonRef}
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="mt-7"
+          >
+            {t.addExpense}
+          </InteractiveHoverButton>
         </div>
-        <button
-          ref={addExpenseButtonRef}
-          type="button"
-          onClick={() => setModalOpen(true)}
-          className="inline-flex h-12 shrink-0 items-center justify-center gap-2 self-start rounded-full bg-accent px-5 font-medium text-white shadow-[0_8px_24px_-12px_rgba(34,113,246,0.85)] transition duration-300 ease-apple hover:-translate-y-0.5 hover:bg-accent/90 active:translate-y-0 sm:self-auto"
-        >
-          <Plus className="h-5 w-5" strokeWidth={2} />
-          {t.addExpense}
-        </button>
+        <div className="mx-auto lg:me-0"><SettlementLoop locale={locale} /></div>
       </section>
 
       <section className="pt-9 sm:pt-12">
@@ -97,7 +106,7 @@ export function ExpenseApp() {
           <h2 className="text-2xl font-semibold tracking-[-0.025em]">
             {view === 'expenses' ? t.ledgerTitle : t.balanceTitle}
           </h2>
-          <div className="inline-flex self-start rounded-full bg-ink/[0.055] p-1 dark:bg-white/[0.07]" role="tablist" aria-label="Ledger view">
+          <div className="inline-flex self-start rounded-full bg-ink/[0.055] p-1 dark:bg-white/[0.07]" role="tablist" aria-label={t.ledgerViewLabel}>
             <button
               id="ledger-tab-expenses"
               type="button"
@@ -141,6 +150,13 @@ export function ExpenseApp() {
         </div>
       </section>
 
+      <ScenarioSection locale={locale} />
+
+      <footer className="mt-14 flex flex-col gap-2 border-t border-line pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+        <span>{t.byline}</span>
+        <span>Next.js · NestJS · SQLite</span>
+      </footer>
+
       {modalOpen && (
         <ExpenseModal
           users={users}
@@ -149,7 +165,8 @@ export function ExpenseApp() {
           onCreated={handleCreated}
         />
       )}
-    </main>
+      </main>
+    </>
   );
 }
 
@@ -163,7 +180,7 @@ function ExpenseList({ expenses, locale, emptyTitle, emptyDetail, paidLabel }: {
   if (expenses.length === 0) return <EmptyState icon="receipt" title={emptyTitle} detail={emptyDetail} />;
 
   return (
-    <ul className="divide-y divide-line border-y border-line">
+    <AnimatedList as="ul" className="divide-y divide-line border-y border-line">
       {expenses.map((expense) => (
         <li key={expense.id} className="grid gap-4 py-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:py-6">
           <div className="flex min-w-0 items-center gap-3.5 sm:gap-4">
@@ -185,7 +202,7 @@ function ExpenseList({ expenses, locale, emptyTitle, emptyDetail, paidLabel }: {
           </div>
         </li>
       ))}
-    </ul>
+    </AnimatedList>
   );
 }
 
@@ -199,7 +216,7 @@ function BalanceList({ balances, locale, emptyTitle, emptyDetail, owesLabel }: {
   if (balances.length === 0) return <EmptyState icon="scale" title={emptyTitle} detail={emptyDetail} />;
 
   return (
-    <ul className="divide-y divide-line border-y border-line">
+    <AnimatedList as="ul" className="divide-y divide-line border-y border-line">
       {balances.map((balance) => (
         <li key={`${balance.debtor.id}-${balance.creditor.id}`} className="flex items-center gap-3 py-5 sm:gap-5 sm:py-6">
           <div className="flex -space-x-2 rtl:space-x-reverse">
@@ -214,7 +231,62 @@ function BalanceList({ balances, locale, emptyTitle, emptyDetail, owesLabel }: {
           <span className="text-lg font-semibold tabular-nums tracking-[-0.015em] sm:text-xl">{formatAmount(balance.amount, locale)}</span>
         </li>
       ))}
-    </ul>
+    </AnimatedList>
+  );
+}
+
+function ScenarioSection({ locale }: { locale: Locale }) {
+  const t = getMessages(locale);
+  const scenarios = [
+    { title: t.twoWay, input: t.twoWayInput, result: t.twoWayResult },
+    { title: t.loop, input: t.loopInput, result: t.loopResult },
+  ];
+
+  return (
+    <section className="mt-14 border-t border-line pt-10 sm:mt-20 sm:pt-12">
+      <h2 className="text-2xl font-semibold tracking-[-0.025em]">{t.examplesTitle}</h2>
+      <p className="mt-2 max-w-xl text-sm leading-6 text-muted sm:text-base">{t.examplesIntro}</p>
+      <div className="mt-7 divide-y divide-line border-y border-line">
+        {scenarios.map((scenario) => (
+          <div key={scenario.title} className="grid gap-3 py-5 sm:grid-cols-[10rem_minmax(0,1fr)_auto] sm:items-center sm:gap-6">
+            <strong className="font-semibold">{scenario.title}</strong>
+            <span className="text-sm leading-6 text-muted" dir={locale === 'fa' ? 'rtl' : 'ltr'}>{scenario.input}</span>
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-ink">
+              <Check className="h-4 w-4 text-accent" />
+              {scenario.result}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PageLoader({ label }: { label: string }) {
+  useEffect(() => {
+    const background = Array.from(document.body.children).filter(
+      (element) => element.getAttribute('data-page-loader-root') !== 'true',
+    ) as HTMLElement[];
+    background.forEach((element) => {
+      element.inert = true;
+      element.setAttribute('aria-hidden', 'true');
+    });
+    return () => background.forEach((element) => {
+      element.inert = false;
+      element.removeAttribute('aria-hidden');
+    });
+  }, []);
+
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
+    <div data-page-loader-root="true" className="fixed inset-0 z-[100] grid place-items-center bg-canvas px-6" role="status" aria-live="polite" aria-busy="true">
+      <div className="text-center">
+        <div className="loader-mark mx-auto flex justify-center"><SettlementLoop compact /></div>
+        <p className="mt-1 text-sm font-medium text-muted">{label}</p>
+      </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -295,6 +367,20 @@ function ExpenseModal({ users, locale, onClose, onCreated }: {
     }
   }
 
+  function changePayer(nextPayerId: string) {
+    setPayerId(nextPayerId);
+    if (nextPayerId === beneficiaryId) {
+      setBeneficiaryId(users.find((user) => user.id !== nextPayerId)?.id ?? '');
+    }
+  }
+
+  function changeBeneficiary(nextBeneficiaryId: string) {
+    setBeneficiaryId(nextBeneficiaryId);
+    if (nextBeneficiaryId === payerId) {
+      setPayerId(users.find((user) => user.id !== nextBeneficiaryId)?.id ?? '');
+    }
+  }
+
   return createPortal(
     <div data-modal-root="true" className="fixed inset-0 z-50 grid items-end bg-black/45 p-0 backdrop-blur-[2px] sm:place-items-center sm:p-6" onMouseDown={(event) => event.target === event.currentTarget && !saving && onClose()}>
       <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="expense-modal-title" className="animate-modal-in w-full max-w-full rounded-t-2xl bg-surface shadow-modal sm:max-w-lg sm:rounded-2xl">
@@ -307,9 +393,9 @@ function ExpenseModal({ users, locale, onClose, onCreated }: {
 
         <form onSubmit={submit} className="space-y-5 px-5 py-6 sm:px-6">
           <div className="grid grid-cols-[1fr_auto_1fr] items-end gap-2 sm:gap-3">
-            <SelectField label={t.paidBy} value={payerId} onChange={setPayerId} users={users} />
+            <SelectField label={t.paidBy} value={payerId} onChange={changePayer} users={users} excludedId={beneficiaryId} />
             <ArrowRight className={`mb-3 h-5 w-5 text-muted ${locale === 'fa' ? 'rotate-180' : ''}`} aria-hidden="true" />
-            <SelectField label={t.expenseFor} value={beneficiaryId} onChange={setBeneficiaryId} users={users} />
+            <SelectField label={t.expenseFor} value={beneficiaryId} onChange={changeBeneficiary} users={users} excludedId={payerId} />
           </div>
           <p className="-mt-2 text-xs leading-5 text-muted">{t.directionHelp}</p>
 
@@ -339,12 +425,18 @@ function ExpenseModal({ users, locale, onClose, onCreated }: {
   );
 }
 
-function SelectField({ label, value, onChange, users }: { label: string; value: string; onChange: (value: string) => void; users: User[] }) {
+function SelectField({ label, value, onChange, users, excludedId }: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  users: User[];
+  excludedId: string;
+}) {
   return (
     <label className="min-w-0">
       <span className="mb-2 block text-sm font-medium">{label}</span>
-      <select value={value} onChange={(event) => onChange(event.target.value)} className="h-12 w-full rounded-xl bg-canvas px-3 text-sm outline-none ring-1 ring-inset ring-line transition focus:ring-2 focus:ring-accent sm:px-4 sm:text-base">
-        {users.map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}
+      <select value={value} onChange={(event) => onChange(event.target.value)} className="h-12 w-full rounded-xl bg-canvas px-3 text-base outline-none ring-1 ring-inset ring-line transition focus:ring-2 focus:ring-accent sm:px-4">
+        {users.map((user) => <option key={user.id} value={user.id} disabled={user.id === excludedId}>{user.name}</option>)}
       </select>
     </label>
   );

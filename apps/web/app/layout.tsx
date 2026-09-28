@@ -12,15 +12,17 @@ export const metadata: Metadata = {
 
 const themeScript = `
   (() => {
-    const saved = localStorage.getItem('settle-theme');
-    const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.classList.toggle('dark', dark);
+    const theme = localStorage.getItem('settle-theme') || 'light';
+    const locale = localStorage.getItem('settle-locale') || 'fa';
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.lang = locale;
+    document.documentElement.dir = locale === 'fa' ? 'rtl' : 'ltr';
   })();
 `;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="fa" dir="rtl" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

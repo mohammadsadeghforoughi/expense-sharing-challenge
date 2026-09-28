@@ -30,7 +30,7 @@ Users move between an expense ledger and a balances view on one responsive page.
 
 - Users are seeded; there is no authentication, registration, or user management.
 - Every expense has one payer, one beneficiary, an amount, a description, and a date.
-- The API lists users and expenses, creates expenses, and computes pairwise net balances.
+- The API lists users and expenses, creates expenses, and computes simplified final payments across all users.
 - English and Persian interfaces are required, including correct right-to-left behavior.
 - Light and dark themes are required.
 - Swagger API documentation is required.

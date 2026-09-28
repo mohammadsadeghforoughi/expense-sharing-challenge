@@ -25,7 +25,7 @@ export class ExpensesController {
 
   @Get('balances')
   @ApiTags('balances')
-  @ApiOperation({ summary: 'List pairwise net balances' })
+  @ApiOperation({ summary: 'List simplified settlements across all users' })
   @ApiOkResponse({ type: [Balance] })
   balances() {
     return this.expensesService.getBalances();

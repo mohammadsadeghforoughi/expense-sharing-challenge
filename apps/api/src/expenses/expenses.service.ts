@@ -82,30 +82,49 @@ export class ExpensesService {
       .prepare('SELECT payer_id, beneficiary_id, amount_cents FROM expenses')
       .all() as BalanceRow[];
 
-    const pairs = new Map<string, { first: string; second: string; toFirst: number }>();
-
+    const netByUser = new Map(users.map((user) => [user.id, 0]));
     for (const transaction of transactions) {
-      const [first, second] = [transaction.payer_id, transaction.beneficiary_id].sort();
-      const key = `${first}:${second}`;
-      const pair = pairs.get(key) ?? { first, second, toFirst: 0 };
-      pair.toFirst += transaction.payer_id === first
-        ? transaction.amount_cents
-        : -transaction.amount_cents;
-      pairs.set(key, pair);
+      netByUser.set(
+        transaction.payer_id,
+        (netByUser.get(transaction.payer_id) ?? 0) + transaction.amount_cents,
+      );
+      netByUser.set(
+        transaction.beneficiary_id,
+        (netByUser.get(transaction.beneficiary_id) ?? 0) - transaction.amount_cents,
+      );
     }
 
-    return [...pairs.values()]
-      .filter((pair) => pair.toFirst !== 0)
-      .map((pair) => {
-        const creditorId = pair.toFirst > 0 ? pair.first : pair.second;
-        const debtorId = pair.toFirst > 0 ? pair.second : pair.first;
-        return {
-          debtor: usersById.get(debtorId)!,
-          creditor: usersById.get(creditorId)!,
-          amount: Math.abs(pair.toFirst) / 100,
-        };
-      })
-      .sort((a, b) => b.amount - a.amount);
+    const creditors = [...netByUser.entries()]
+      .filter(([, cents]) => cents > 0)
+      .map(([id, cents]) => ({ id, cents }))
+      .sort((a, b) => b.cents - a.cents || a.id.localeCompare(b.id));
+    const debtors = [...netByUser.entries()]
+      .filter(([, cents]) => cents < 0)
+      .map(([id, cents]) => ({ id, cents: Math.abs(cents) }))
+      .sort((a, b) => b.cents - a.cents || a.id.localeCompare(b.id));
+
+    const settlements: Balance[] = [];
+    let creditorIndex = 0;
+    let debtorIndex = 0;
+
+    while (creditorIndex < creditors.length && debtorIndex < debtors.length) {
+      const creditor = creditors[creditorIndex];
+      const debtor = debtors[debtorIndex];
+      const cents = Math.min(creditor.cents, debtor.cents);
+
+      settlements.push({
+        debtor: usersById.get(debtor.id)!,
+        creditor: usersById.get(creditor.id)!,
+        amount: cents / 100,
+      });
+
+      creditor.cents -= cents;
+      debtor.cents -= cents;
+      if (creditor.cents === 0) creditorIndex += 1;
+      if (debtor.cents === 0) debtorIndex += 1;
+    }
+
+    return settlements;
   }
 
   private findRowById(id: number): ExpenseRow {

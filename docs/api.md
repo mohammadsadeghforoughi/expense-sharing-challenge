@@ -21,6 +21,8 @@ The beneficiary owes the payer. The API rejects identical users, unknown users, 
 
 `GET /balances`
 
+The response contains simplified final payments after netting every user's position across the group. Reciprocal debts and closed loops are removed.
+
 ```json
 [
   {

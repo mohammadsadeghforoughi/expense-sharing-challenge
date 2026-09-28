@@ -26,7 +26,7 @@ The browser uses relative `/api` URLs. This avoids environment-specific public A
 - Validates create payloads and user relationships.
 - Stores amounts as integer cents.
 - Joins users into expense response objects.
-- Nets reciprocal expenses per unordered pair.
+- Calculates each user's net position and returns simplified settlements.
 - Generates OpenAPI documentation through Nest Swagger.
 
 ### Database
@@ -35,6 +35,4 @@ SQLite is initialized on application startup. Schema creation is idempotent, use
 
 ## Balance algorithm
 
-For each unordered user pair, expenses paid by the first user increase the amount owed to that user; expenses paid by the second decrease it. A zero total is omitted. The sign identifies the creditor and debtor, and the absolute value is returned as the amount.
-
-This is pairwise netting, not graph-wide debt simplification. It preserves the requirement that balances describe the current net relationship between specific users.
+Every expense adds to the payer's position and subtracts from the beneficiary's position. The service then matches debtors with creditors. Reciprocal debts and closed loops therefore collapse into the smallest practical set of final payments.

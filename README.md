@@ -1,6 +1,6 @@
 # Settle — Expense Sharing Challenge
 
-A deliberately small full-stack expense-sharing application. Seeded users can record a directional expense and see pairwise balances netted automatically.
+A deliberately small full-stack expense-sharing application. Seeded users can record a directional expense and see the simplest final payments across the group.
 
 ## Run with Docker
 
@@ -57,7 +57,7 @@ Money is stored as integer cents. Each expense means the beneficiary owes the pa
 | `GET` | `/users` | List seeded users |
 | `GET` | `/expenses` | List expenses newest first |
 | `POST` | `/expenses` | Create a directional expense |
-| `GET` | `/balances` | Return pairwise net balances |
+| `GET` | `/balances` | Return simplified final payments across all users |
 | `GET` | `/health` | Container health check |
 
 The repository includes illustrative seed expenses on a fresh database. The Anjoman Max webfont came from the archive supplied with the task; its license copy is preserved in `docs/anjoman-license.pdf`.

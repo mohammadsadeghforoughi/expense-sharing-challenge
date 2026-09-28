@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-28T12:27:58Z",
+  "generatedAt": "2026-09-28T13:13:14Z",
   "title": "Design System: Settle",
   "extensions": {
     "colorMeta": {
@@ -76,6 +76,30 @@
         "canonical": "rgb(64 140 255)",
         "tonalRamp": ["oklch(15% 0.16 255)", "oklch(27% 0.16 255)", "oklch(39% 0.16 255)", "oklch(51% 0.16 255)", "oklch(63% 0.16 255)", "oklch(75% 0.16 255)", "oklch(87% 0.16 255)", "oklch(95% 0.16 255)"]
       },
+      "loop-coral": {
+        "role": "secondary",
+        "displayName": "Settlement Coral",
+        "canonical": "#FF7A64",
+        "tonalRamp": ["oklch(15% 0.14 30)", "oklch(27% 0.14 30)", "oklch(39% 0.14 30)", "oklch(51% 0.14 30)", "oklch(63% 0.14 30)", "oklch(75% 0.14 30)", "oklch(87% 0.14 30)", "oklch(95% 0.14 30)"]
+      },
+      "loop-blue": {
+        "role": "secondary",
+        "displayName": "Settlement Blue",
+        "canonical": "#5E8BFF",
+        "tonalRamp": ["oklch(15% 0.15 260)", "oklch(27% 0.15 260)", "oklch(39% 0.15 260)", "oklch(51% 0.15 260)", "oklch(63% 0.15 260)", "oklch(75% 0.15 260)", "oklch(87% 0.15 260)", "oklch(95% 0.15 260)"]
+      },
+      "loop-green": {
+        "role": "secondary",
+        "displayName": "Settlement Green",
+        "canonical": "#38A87A",
+        "tonalRamp": ["oklch(15% 0.11 160)", "oklch(27% 0.11 160)", "oklch(39% 0.11 160)", "oklch(51% 0.11 160)", "oklch(63% 0.11 160)", "oklch(75% 0.11 160)", "oklch(87% 0.11 160)", "oklch(95% 0.11 160)"]
+      },
+      "loop-violet": {
+        "role": "secondary",
+        "displayName": "Settlement Violet",
+        "canonical": "#9B72E8",
+        "tonalRamp": ["oklch(15% 0.13 300)", "oklch(27% 0.13 300)", "oklch(39% 0.13 300)", "oklch(51% 0.13 300)", "oklch(63% 0.13 300)", "oklch(75% 0.13 300)", "oklch(87% 0.13 300)", "oklch(95% 0.13 300)"]
+      },
       "error-wash": {
         "role": "tertiary",
         "displayName": "Error Wash",
@@ -97,7 +121,7 @@
     },
     "typographyMeta": {
       "display": { "displayName": "Display", "purpose": "One page-level statement with compact leading and quiet authority." },
-      "headline": { "displayName": "Headline", "purpose": "Primary section headings such as Activity and Current balances." },
+      "headline": { "displayName": "Headline", "purpose": "Primary section headings such as Activity, Final payments, and Test scenarios." },
       "title": { "displayName": "Title", "purpose": "Dialog titles and strong secondary headings." },
       "body": { "displayName": "Body", "purpose": "Readable descriptions, guidance, and explanatory content." },
       "label": { "displayName": "Label", "purpose": "Buttons, tabs, fields, utility controls, and navigation." }
@@ -106,17 +130,34 @@
       { "name": "modal-lift", "value": "0 24px 64px -24px rgba(0, 0, 0, 0.28)", "purpose": "Broad ambient separation for the add-expense dialog only." },
       { "name": "create-glow", "value": "0 8px 24px -12px rgba(34, 113, 246, 0.85)", "purpose": "Restrained blue presence beneath the primary create action." },
       { "name": "selected-tab", "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)", "purpose": "Minimal lift for the selected item inside a segmented control." },
-      { "name": "flow-chip", "value": "0 4px 16px -12px rgba(0, 0, 0, 0.45)", "purpose": "Barely perceptible separation for architecture flow nodes." }
+      { "name": "flow-chip", "value": "0 4px 16px -12px rgba(0, 0, 0, 0.45)", "purpose": "Barely perceptible separation for architecture flow nodes." },
+      { "name": "network-card-lift", "value": "0 30px 80px -38px rgba(34, 113, 246, 0.55)", "purpose": "Broad blue ambient separation for the luminous settlement network." },
+      { "name": "settled-core-glow", "value": "0 18px 45px -24px rgba(34, 113, 246, 0.9)", "purpose": "Focused glow beneath the central settled result." },
+      { "name": "title-line-shadow", "value": "0.045em 0.045em 0 rgb(34 113 246 / 0.22)", "purpose": "Crisp accent echo beneath one outcome phrase in the home hero." }
     ],
     "motion": [
-      { "name": "ease-apple", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Gentle deceleration for modal entry and primary-action lift." },
-      { "name": "duration-standard", "value": "300ms", "purpose": "Default duration for meaningful hover transformations." },
+      { "name": "ease-apple", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Gentle deceleration for modal entry, list arrival, loader pulse, and theme reveal." },
+      { "name": "duration-standard", "value": "300ms", "purpose": "Icon swaps and label transitions." },
+      { "name": "duration-button-fill", "value": "500ms", "purpose": "Expanding white-dot fill on the primary create action." },
       { "name": "duration-modal", "value": "360ms", "purpose": "Dialog fade, rise, and subtle scale-in." },
+      { "name": "duration-theme-reveal", "value": "420ms", "purpose": "Circular view-transition reveal originating at the theme toggle." },
+      { "name": "duration-list-in", "value": "520ms", "purpose": "Rise-and-deblur arrival for ledger rows." },
+      { "name": "stagger-list", "value": "75ms", "purpose": "Per-row delay for ledger arrival." },
+      { "name": "duration-loader-pulse", "value": "1.6s", "purpose": "Gentle pulse for the compact orbit mark during initial loading." },
+      { "name": "duration-network-ring", "value": "26s linear infinite", "purpose": "Very slow rotation of the outer dotted network ring." },
+      { "name": "duration-network-core", "value": "3.2s ease-in-out infinite", "purpose": "Breathing shadow around the settled $0 core." },
+      { "name": "duration-network-chip", "value": "4s ease-in-out infinite", "purpose": "Seven-pixel vertical drift for floating amount chips; the second begins at -2s." },
+      { "name": "duration-particle-upper", "value": "4.8s repeat", "purpose": "Blue SVG particle along the upper curved payment path." },
+      { "name": "duration-particle-lower", "value": "5.6s repeat, begin -2.7s", "purpose": "Green SVG particle along the lower curved payment path." },
+      { "name": "duration-particle-cross", "value": "3.9s repeat, begin -1.2s", "purpose": "Coral SVG particle across the central payment path." },
+      { "name": "duration-loader-outer-orbit", "value": "2.4s linear infinite", "purpose": "Forward rotation of the dashed blue loader orbit." },
+      { "name": "duration-loader-inner-orbit", "value": "3.2s linear infinite reverse", "purpose": "Reverse rotation of the green loader orbit." },
       { "name": "reduced-motion", "value": "0.01ms", "purpose": "Effective animation and transition duration when reduced motion is requested." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" }
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
     ]
   },
   "components": [
@@ -124,38 +165,62 @@
       "name": "Create Expense Button",
       "kind": "button",
       "refersTo": "button-create",
-      "description": "The one blue page action; opens the short add-expense task.",
-      "html": "<button class=\"ds-btn-create\" type=\"button\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg><span>Add expense</span></button>",
-      "css": ".ds-btn-create { display:inline-flex; height:48px; align-items:center; justify-content:center; gap:8px; border:0; border-radius:999px; padding:0 20px; background:rgb(var(--accent, 34 113 246)); color:#fff; font:500 16px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; box-shadow:0 8px 24px -12px rgba(34,113,246,.85); cursor:pointer; transition:background-color 300ms,transform 300ms cubic-bezier(.16,1,.3,1); } .ds-btn-create svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; } .ds-btn-create:hover { background:rgb(var(--accent, 34 113 246)/.9); transform:translateY(-2px); } .ds-btn-create:active { transform:translateY(0); } .ds-btn-create:focus-visible { outline:3px solid rgb(var(--accent, 34 113 246)/.45); outline-offset:2px; } @media (prefers-reduced-motion:reduce) { .ds-btn-create { transition-duration:.01ms; } }"
+      "description": "The one blue page action; its expanding white fill reveals a directional confirmation label on hover.",
+      "html": "<button class=\"ds-btn-create\" type=\"button\"><span class=\"ds-btn-dot\" aria-hidden=\"true\"></span><span class=\"ds-btn-label\">ثبت هزینه</span><span class=\"ds-btn-reveal\">ثبت هزینه<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></span></button>",
+      "css": ".ds-btn-create { position:relative; display:inline-flex; height:48px; align-items:center; justify-content:center; overflow:hidden; border:0; border-radius:999px; padding:0 24px; background:rgb(var(--accent,34 113 246)); color:#fff; font:500 16px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; box-shadow:0 8px 24px -12px rgba(34,113,246,.85); cursor:pointer; } .ds-btn-dot { position:absolute; inset-inline-start:18px; width:8px; height:8px; border-radius:999px; background:#fff; transition:transform 500ms cubic-bezier(.16,1,.3,1); } .ds-btn-label { position:relative; transition:transform 300ms cubic-bezier(.16,1,.3,1),opacity 300ms; } .ds-btn-reveal { position:absolute; display:flex; align-items:center; gap:8px; color:rgb(var(--accent,34 113 246)); opacity:0; transform:translateX(32px); transition:transform 300ms cubic-bezier(.16,1,.3,1),opacity 300ms; } .ds-btn-reveal svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; } .ds-btn-create:hover .ds-btn-dot { transform:scale(35); } .ds-btn-create:hover .ds-btn-label { transform:translateX(32px); opacity:0; } .ds-btn-create:hover .ds-btn-reveal { transform:translateX(0); opacity:1; } .ds-btn-create:focus-visible { outline:3px solid rgb(var(--accent,34 113 246)/.45); outline-offset:2px; } @media (prefers-reduced-motion:reduce) { .ds-btn-create * { transition-duration:.01ms!important; } }"
     },
     {
-      "name": "Header Navigation",
+      "name": "Header Navigation & Theme Toggle",
       "kind": "nav",
-      "description": "A quiet segmented desktop navigation whose active destination uses surface, not accent.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a class=\"ds-nav-item ds-nav-active\" href=\"#\">Expenses</a><a class=\"ds-nav-item\" href=\"#\">About</a></nav>",
-      "css": ".ds-nav { display:inline-flex; align-items:center; gap:0; border-radius:999px; padding:4px; background:rgb(var(--ink, 28 28 30)/.045); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-nav-item { border-radius:999px; padding:6px 16px; color:rgb(var(--muted, 99 99 104)); font-size:14px; line-height:1.5; text-decoration:none; transition:color 150ms,background-color 150ms; } .ds-nav-item:hover { color:rgb(var(--ink, 28 28 30)); } .ds-nav-item:focus-visible { outline:3px solid rgb(var(--accent, 34 113 246)/.45); outline-offset:2px; } .ds-nav-active { background:rgb(var(--surface, 255 255 255)); color:rgb(var(--ink, 28 28 30)); box-shadow:0 1px 2px rgb(0 0 0/.05); }"
+      "refersTo": "theme-toggle",
+      "description": "Surface-selected navigation beside a 44px theme control whose icon morph accompanies a circular page-theme reveal.",
+      "html": "<div class=\"ds-header-controls\"><nav class=\"ds-nav\" aria-label=\"Primary\"><a class=\"ds-nav-item ds-nav-active\" href=\"#\">هزینه‌ها</a><a class=\"ds-nav-item\" href=\"#\">درباره پروژه</a></nav><button class=\"ds-theme-toggle\" type=\"button\" aria-label=\"تغییر پوسته\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42\"/></svg></button></div>",
+      "css": ".ds-header-controls { display:flex; align-items:center; gap:6px; font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-nav { display:inline-flex; border-radius:999px; padding:4px; background:rgb(var(--ink,28 28 30)/.045); } .ds-nav-item { border-radius:999px; padding:6px 16px; color:rgb(var(--muted,99 99 104)); font-size:14px; text-decoration:none; transition:color 150ms,background-color 150ms; } .ds-nav-item:hover { color:rgb(var(--ink,28 28 30)); } .ds-nav-active { background:rgb(var(--surface,255 255 255)); color:rgb(var(--ink,28 28 30)); box-shadow:0 1px 2px rgb(0 0 0/.05); } .ds-theme-toggle { display:grid; width:44px; height:44px; place-items:center; border:0; border-radius:999px; background:transparent; color:rgb(var(--muted,99 99 104)); cursor:pointer; transition:color 150ms,background-color 150ms; } .ds-theme-toggle:hover { background:rgb(var(--ink,28 28 30)/.055); color:rgb(var(--ink,28 28 30)); } .ds-theme-toggle svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; transition:transform 300ms,opacity 300ms; } .ds-theme-toggle:hover svg { transform:rotate(22deg) scale(1.05); } .ds-header-controls :focus-visible { outline:3px solid rgb(var(--accent,34 113 246)/.45); outline-offset:2px; } @media (prefers-reduced-motion:reduce) { .ds-theme-toggle svg { transition-duration:.01ms; } }"
     },
     {
       "name": "Ledger View Tabs",
       "kind": "chip",
       "refersTo": "tab-active",
-      "description": "Keyboard-operable segmented tabs for switching between transactions and net balances.",
+      "description": "Keyboard-operable segmented tabs for switching between transactions and final payments.",
       "html": "<div class=\"ds-tabs\" role=\"tablist\" aria-label=\"Ledger view\"><button class=\"ds-tab ds-tab-active\" role=\"tab\" aria-selected=\"true\">Expenses <span>12</span></button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\">Balances <span>3</span></button></div>",
       "css": ".ds-tabs { display:inline-flex; align-items:center; border-radius:999px; padding:4px; background:rgb(var(--ink, 28 28 30)/.055); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-tab { border:0; border-radius:999px; padding:8px 16px; background:transparent; color:rgb(var(--muted, 99 99 104)); font-size:14px; font-weight:500; line-height:1.5; cursor:pointer; transition:color 150ms,background-color 150ms,box-shadow 150ms; } .ds-tab span { margin-inline-start:8px; color:rgb(var(--muted, 99 99 104)); font-variant-numeric:tabular-nums; } .ds-tab:hover { color:rgb(var(--ink, 28 28 30)); } .ds-tab:focus-visible { outline:3px solid rgb(var(--accent, 34 113 246)/.45); outline-offset:2px; } .ds-tab-active { background:rgb(var(--surface, 255 255 255)); color:rgb(var(--ink, 28 28 30)); box-shadow:0 1px 2px rgb(0 0 0/.05); }"
     },
     {
-      "name": "Expense Ledger Row",
+      "name": "Line-Shadow Hero Phrase",
       "kind": "custom",
-      "description": "A border-led transaction row that keeps payer, beneficiary, date, and amount in one readable line of evidence.",
-      "html": "<article class=\"ds-expense-row\"><span class=\"ds-avatar\" aria-hidden=\"true\">AM</span><div class=\"ds-expense-copy\"><strong>Dinner</strong><p>Arman paid for Sara · Sep 28, 2026</p></div><data class=\"ds-expense-amount\" value=\"42\">$42</data></article>",
-      "css": ".ds-expense-row { display:grid; grid-template-columns:40px minmax(0,1fr) auto; align-items:center; gap:16px; border-block:1px solid rgb(var(--line, 224 224 221)); padding:24px 0; color:rgb(var(--ink, 28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-avatar { display:grid; width:40px; height:40px; place-items:center; border-radius:999px; background:#7c3aed; color:#fff; font-size:12px; font-weight:600; } .ds-expense-copy { min-width:0; } .ds-expense-copy strong { display:block; overflow:hidden; font-size:16px; font-weight:500; text-overflow:ellipsis; white-space:nowrap; } .ds-expense-copy p { margin:4px 0 0; color:rgb(var(--muted, 99 99 104)); font-size:14px; line-height:1.5; } .ds-expense-amount { font-size:18px; font-weight:600; letter-spacing:-.015em; font-variant-numeric:tabular-nums; text-align:end; }"
+      "description": "A crisp blue echo gives one outcome phrase a quiet signature without turning the title into an effect.",
+      "html": "<h1 class=\"ds-hero-title\"><span>خرج‌های مشترک،</span><span class=\"ds-line-shadow\">تسویه‌ی ساده.</span></h1>",
+      "css": ".ds-hero-title { margin:0; color:rgb(var(--ink,28 28 30)); font:600 clamp(2.25rem,6vw,4.75rem)/1.02 Anjoman,ui-sans-serif,system-ui,sans-serif; letter-spacing:-.04em; text-wrap:balance; } .ds-hero-title > span { display:block; } .ds-line-shadow { width:max-content; text-shadow:.045em .045em 0 rgb(var(--accent,34 113 246)/.22); }"
     },
     {
-      "name": "Plain-Language Balance Row",
+      "name": "Settlement Network & Orbit Loader",
       "kind": "custom",
-      "description": "The signature balance treatment: paired identity, an explicit owes relationship, and a stable amount.",
+      "refersTo": "settlement-loop",
+      "description": "A luminous four-person payment network explains convergence; a separate dual-orbit mark handles initial loading.",
+      "html": "<div class=\"ds-settlement-specimen\" dir=\"rtl\"><div class=\"ds-network-card\" aria-hidden=\"true\"><span class=\"ds-light ds-light-blue\"></span><span class=\"ds-light ds-light-green\"></span><svg viewBox=\"0 0 340 280\"><defs><path id=\"ds-top-flow\" d=\"M62 140 C78 64 118 42 170 42 C222 42 262 65 278 140\"/><path id=\"ds-bottom-flow\" d=\"M278 140 C260 216 220 238 170 238 C118 238 80 216 62 140\"/><path id=\"ds-cross-flow\" d=\"M62 140 C122 124 212 158 278 140\"/></defs><circle class=\"ds-ring\" cx=\"170\" cy=\"140\" r=\"91\"/><circle class=\"ds-ring ds-ring-outer\" cx=\"170\" cy=\"140\" r=\"112\"/><use href=\"#ds-top-flow\" class=\"ds-flow\"/><use href=\"#ds-bottom-flow\" class=\"ds-flow\"/><use href=\"#ds-cross-flow\" class=\"ds-cross\"/><g class=\"ds-particle\"><circle r=\"5\" fill=\"#5E8BFF\"/><animateMotion dur=\"4.8s\" repeatCount=\"indefinite\"><mpath href=\"#ds-top-flow\"/></animateMotion></g><g class=\"ds-particle\"><circle r=\"4\" fill=\"#38A87A\"/><animateMotion dur=\"5.6s\" begin=\"-2.7s\" repeatCount=\"indefinite\"><mpath href=\"#ds-bottom-flow\"/></animateMotion></g><g class=\"ds-particle\"><circle r=\"3.5\" fill=\"#FF7A64\"/><animateMotion dur=\"3.9s\" begin=\"-1.2s\" repeatCount=\"indefinite\"><mpath href=\"#ds-cross-flow\"/></animateMotion></g><g class=\"ds-node\" transform=\"translate(62 140)\"><circle r=\"22\"/><circle r=\"17\" fill=\"#FF7A64\"/><text>A</text></g><g class=\"ds-node\" transform=\"translate(170 42)\"><circle r=\"22\"/><circle r=\"17\" fill=\"#5E8BFF\"/><text>B</text></g><g class=\"ds-node\" transform=\"translate(278 140)\"><circle r=\"22\"/><circle r=\"17\" fill=\"#38A87A\"/><text>D</text></g><g class=\"ds-node\" transform=\"translate(170 238)\"><circle r=\"22\"/><circle r=\"17\" fill=\"#9B72E8\"/><text>C</text></g></svg><div class=\"ds-core\"><span>✓</span><strong>$0</strong><small>تسویه</small></div><b class=\"ds-chip ds-chip-plus\" dir=\"ltr\">+$45</b><b class=\"ds-chip ds-chip-minus\" dir=\"ltr\">−$35</b><p class=\"ds-network-copy\">بدهی‌ها ساده می‌شوند</p></div><div class=\"ds-loader-group\" role=\"status\"><div class=\"ds-loader-mark\" aria-hidden=\"true\"><span class=\"ds-loader-glow\"></span><span class=\"ds-loader-core\">$0</span><span class=\"ds-loader-orbit ds-loader-outer\"><i></i></span><span class=\"ds-loader-orbit ds-loader-inner\"><i></i></span></div><p>در حال بارگذاری دفتر هزینه‌ها…</p></div></div>",
+      "css": ".ds-settlement-specimen { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:28px; color:rgb(var(--ink,28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-network-card { position:relative; width:340px; height:280px; max-width:100%; overflow:hidden; border:1px solid rgb(255 255 255/.7); border-radius:32px; background:rgb(var(--surface,255 255 255)/.65); box-shadow:0 30px 80px -38px rgba(34,113,246,.55); backdrop-filter:blur(24px); } .ds-light { position:absolute; border-radius:999px; filter:blur(48px); } .ds-light-blue { inset-inline-start:-56px; top:-64px; width:192px; height:192px; background:rgb(94 139 255/.2); } .ds-light-green { inset-inline-end:-40px; bottom:-80px; width:208px; height:208px; background:rgb(56 168 122/.15); } .ds-network-card > svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; fill:none; } .ds-ring { fill:none; stroke:rgb(var(--line,224 224 221)/.7); stroke-dasharray:3 8; } .ds-ring-outer { stroke:rgb(var(--accent,34 113 246)/.15); stroke-dasharray:1 13; stroke-linecap:round; transform-origin:170px 140px; animation:ds-ring-spin 26s linear infinite; } .ds-flow { fill:none; stroke:rgb(var(--accent,34 113 246)/.48); stroke-width:1.5; } .ds-cross { fill:none; stroke:rgb(var(--line,224 224 221)); stroke-dasharray:4 6; } .ds-particle { filter:drop-shadow(0 0 4px currentColor); } .ds-node > circle:first-child { fill:rgb(var(--canvas,247 247 245)); stroke:rgb(var(--line,224 224 221)); } .ds-node text { fill:#fff; font-size:10px; font-weight:700; text-anchor:middle; dominant-baseline:middle; } .ds-core { position:absolute; inset-inline-start:50%; top:50%; display:grid; width:106px; height:106px; place-items:center; border:1px solid rgb(255 255 255/.8); border-radius:999px; background:rgb(var(--surface,255 255 255)/.85); box-shadow:0 18px 45px -24px rgba(34,113,246,.9); text-align:center; transform:translate(50%,-50%); backdrop-filter:blur(24px); animation:ds-core-breathe 3.2s ease-in-out infinite; } .ds-core span { display:grid; width:20px; height:20px; place-items:center; align-self:end; border-radius:999px; background:#10b981; color:#fff; font-size:12px; } .ds-core strong { font-size:20px; line-height:1; font-variant-numeric:tabular-nums; } .ds-core small { align-self:start; color:rgb(var(--muted,99 99 104)); font-size:9px; font-weight:600; letter-spacing:.12em; } .ds-chip { position:absolute; border:1px solid rgb(var(--line,224 224 221)/.8); border-radius:999px; padding:6px 12px; background:rgb(var(--surface,255 255 255)/.8); box-shadow:0 1px 2px rgb(0 0 0/.05); font-size:11px; font-variant-numeric:tabular-nums; backdrop-filter:blur(8px); animation:ds-chip-float 4s ease-in-out infinite; } .ds-chip-plus { inset-inline-start:20px; top:28px; } .ds-chip-minus { inset-inline-end:20px; bottom:24px; animation-delay:-2s; } .ds-network-copy { position:absolute; inset-inline:0; bottom:12px; margin:0; color:rgb(var(--muted,99 99 104)/.7); text-align:center; font-size:9px; font-weight:500; letter-spacing:.12em; } .ds-loader-group { display:grid; place-items:center; color:rgb(var(--muted,99 99 104)); text-align:center; } .ds-loader-group > p { margin:4px 0 0; font-size:14px; font-weight:500; } .ds-loader-mark { position:relative; width:144px; height:144px; animation:ds-loader-pulse 1.6s cubic-bezier(.16,1,.3,1) infinite; } .ds-loader-glow { position:absolute; inset:34px; border-radius:999px; background:rgb(var(--accent,34 113 246)/.1); filter:blur(20px); } .ds-loader-core { position:absolute; inset:50px; display:grid; place-items:center; border-radius:999px; background:rgb(var(--accent,34 113 246)); color:#fff; font-size:14px; font-weight:600; box-shadow:0 10px 28px -10px rgba(34,113,246,.9); } .ds-loader-orbit { position:absolute; border-radius:999px; border:1px solid rgb(var(--line,224 224 221)); animation:ds-ring-spin 2.4s linear infinite; } .ds-loader-outer { inset:8px; border-style:dashed; } .ds-loader-inner { inset:20px; opacity:.7; animation-direction:reverse; animation-duration:3.2s; } .ds-loader-orbit i { position:absolute; inset-inline-start:50%; border-radius:999px; box-shadow:0 0 0 4px rgb(var(--canvas,247 247 245)); transform:translateX(50%); } .ds-loader-outer i { top:-8px; width:16px; height:16px; background:#5E8BFF; } .ds-loader-inner i { bottom:-6px; width:12px; height:12px; background:#38A87A; } @keyframes ds-ring-spin { to { transform:rotate(360deg); } } @keyframes ds-core-breathe { 50% { box-shadow:0 22px 58px -18px rgb(var(--accent,34 113 246)/.95); } } @keyframes ds-chip-float { 50% { transform:translateY(-7px); } } @keyframes ds-loader-pulse { 50% { transform:scale(1); opacity:1; } 0%,100% { transform:scale(.92); opacity:.62; } } @media (prefers-reduced-motion:reduce) { .ds-ring-outer,.ds-core,.ds-chip,.ds-loader-mark,.ds-loader-orbit { animation:none; } .ds-particle { display:none; } }"
+    },
+    {
+      "name": "Expense Ledger Row",
+      "kind": "custom",
+      "description": "A border-led transaction row that rises and deblurs into place, then stays still for scanning.",
+      "html": "<article class=\"ds-expense-row\"><span class=\"ds-avatar\" aria-hidden=\"true\">AM</span><div class=\"ds-expense-copy\"><strong>Dinner</strong><p>Arman paid for Sara · Sep 28, 2026</p></div><data class=\"ds-expense-amount\" value=\"42\">$42</data></article>",
+      "css": ".ds-expense-row { display:grid; grid-template-columns:40px minmax(0,1fr) auto; align-items:center; gap:16px; border-block:1px solid rgb(var(--line,224 224 221)); padding:24px 0; color:rgb(var(--ink,28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; animation:ds-list-in 520ms cubic-bezier(.16,1,.3,1) both; } .ds-avatar { display:grid; width:40px; height:40px; place-items:center; border-radius:999px; background:#7c3aed; color:#fff; font-size:12px; font-weight:600; } .ds-expense-copy { min-width:0; } .ds-expense-copy strong { display:block; overflow:hidden; font-size:16px; font-weight:500; text-overflow:ellipsis; white-space:nowrap; } .ds-expense-copy p { margin:4px 0 0; color:rgb(var(--muted,99 99 104)); font-size:14px; line-height:1.5; } .ds-expense-amount { font-size:18px; font-weight:600; letter-spacing:-.015em; font-variant-numeric:tabular-nums; text-align:end; } @keyframes ds-list-in { from { opacity:0; transform:translateY(14px); filter:blur(5px); } to { opacity:1; transform:none; filter:blur(0); } } @media (prefers-reduced-motion:reduce) { .ds-expense-row { animation-duration:.01ms; } }"
+    },
+    {
+      "name": "Plain-Language Final Payment Row",
+      "kind": "custom",
+      "description": "The signature final-payment treatment: paired identity, an explicit owes relationship, and a stable amount.",
       "html": "<article class=\"ds-balance-row\" dir=\"auto\"><div class=\"ds-avatar-pair\" aria-hidden=\"true\"><span class=\"ds-avatar ds-debtor\">SA</span><span class=\"ds-avatar ds-creditor\">AM</span></div><p><strong>Sara</strong> <span>owes</span> <strong>Arman</strong></p><data value=\"18.5\">$18.50</data></article>",
       "css": ".ds-balance-row { display:flex; align-items:center; gap:20px; border-block:1px solid rgb(var(--line, 224 224 221)); padding:24px 0; color:rgb(var(--ink, 28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-avatar-pair { display:flex; margin-inline-end:4px; } .ds-avatar-pair .ds-avatar { display:grid; width:40px; height:40px; place-items:center; border-radius:999px; color:#fff; font-size:12px; font-weight:600; } .ds-avatar-pair .ds-avatar + .ds-avatar { margin-inline-start:-8px; box-shadow:0 0 0 4px rgb(var(--canvas, 247 247 245)); } .ds-debtor { background:#d97706; } .ds-creditor { background:#2563eb; } .ds-balance-row p { min-width:0; flex:1; margin:0; font-size:16px; } .ds-balance-row p strong { font-weight:600; } .ds-balance-row p span { margin-inline:6px; color:rgb(var(--muted, 99 99 104)); } .ds-balance-row data { flex:none; font-size:20px; font-weight:600; letter-spacing:-.015em; font-variant-numeric:tabular-nums; text-align:end; }"
+    },
+    {
+      "name": "Test Scenario Row",
+      "kind": "custom",
+      "refersTo": "scenario-row",
+      "description": "A bottom-of-page proof row that aligns the debt input with a check-marked final-payment result.",
+      "html": "<article class=\"ds-scenario\" dir=\"rtl\"><strong>بدهی دوطرفه</strong><span class=\"ds-scenario-input\">باب ۴۵ دلار به آلیس بدهکار است · آلیس ۳۵ دلار به باب</span><span class=\"ds-scenario-result\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\"/></svg>باب ۱۰ دلار به آلیس می‌دهد</span></article>",
+      "css": ".ds-scenario { display:grid; grid-template-columns:160px minmax(0,1fr) auto; align-items:center; gap:24px; border-block:1px solid rgb(var(--line,224 224 221)); padding:20px 0; color:rgb(var(--ink,28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-scenario > strong { font-size:16px; font-weight:600; } .ds-scenario-input { color:rgb(var(--muted,99 99 104)); font-size:14px; line-height:1.5; } .ds-scenario-result { display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; } .ds-scenario-result svg { width:16px; height:16px; fill:none; stroke:rgb(var(--accent,34 113 246)); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; } @media (max-width:639px) { .ds-scenario { grid-template-columns:1fr; gap:12px; } }"
     },
     {
       "name": "Ledger Text Field",
@@ -176,36 +241,43 @@
   ],
   "narrative": {
     "northStar": "The Quiet Shared Ledger",
-    "overview": "Settle should feel like a small, trustworthy record lying open on a calm desk: direct, legible, and free of accounting theater. Its Apple-like restraint comes from generous whitespace, precise type, native-feeling controls, and a neutral material system rather than ornamental surfaces. The interface operates at a comfortable density, with one strong action and no competing accents.\n\nEvery expense is a directional relationship, so payer, beneficiary, arrow, and amount form the visual anchor. Balances translate the same relationship into plain language instead of presenting abstract totals. English and Persian are equal expressions of the same system: layout uses logical properties, icons reverse when direction carries meaning, and numeral-heavy data remains stable and scannable in either direction.",
+    "overview": "Settle should feel like a small, trustworthy record lying open on a calm desk: direct, legible, and free of accounting theater. Its Apple-like restraint comes from generous whitespace, precise type, native-feeling controls, and a neutral material system rather than ornamental surfaces. Persian RTL on the light theme is the intended cold-start experience; English LTR and dark mode are first-class continuations of the same world.\n\nEvery expense is a directional relationship, so payer, beneficiary, arrow, and amount form the visual anchor. A luminous four-person settlement network turns group-wide cancellation into the product’s one memorable visual metaphor: payment particles travel curved paths toward a glowing settled core while floating amount chips show the inputs being simplified. A separate dual-orbit mark introduces the product while data loads, while a restrained blue line-shadow gives one phrase in the hero title a distinct but quiet signature.",
     "keyCharacteristics": [
       "Quiet neutral canvases with a single purposeful blue action color",
       "Large, tightly tracked headings balanced by highly readable body copy",
       "Border-led ledger structure instead of nested cards",
       "Explicit directional relationships and tabular financial numerals",
+      "A luminous settlement network plus a distinct compact orbit loader",
+      "Purposeful motion on theme, list, and create-action state changes",
       "Pill-shaped actions and selectors with softly rounded fields and dialogs",
-      "Responsive LTR/RTL behavior with native-feeling accessibility states"
+      "Persian/light as the default with responsive LTR/RTL and dark-theme parity"
     ],
     "rules": [
       { "name": "The One Blue Action Rule", "body": "Blue identifies creation, focus, and the occasional informational cue; it must not become a general decoration or compete across multiple actions.", "section": "colors" },
-      { "name": "The Theme Pair Rule", "body": "Always consume semantic theme pairs together; never hard-code a light neutral into a dark surface or treat dark mode as an inverted afterthought.", "section": "colors" },
+      { "name": "The Light-First Theme Pair Rule", "body": "Light is the default state, but every semantic neutral and accent must still consume its dark-theme pair; never hard-code a light neutral into a dark surface.", "section": "colors" },
+      { "name": "The Illustration Color Containment Rule", "body": "The coral, blue, green, and violet node colors belong to the settlement network and avatars; do not spread them into navigation, buttons, or decorative page chrome.", "section": "colors" },
       { "name": "The One Typeface Rule", "body": "Keep English, Persian, labels, amounts, and narrative text in Anjoman; hierarchy comes from scale, weight, spacing, and color rather than a second typeface.", "section": "typography" },
       { "name": "The Financial Numeral Rule", "body": "Amounts and count-bearing UI use tabular numerals so changing values never disturb alignment.", "section": "typography" },
-      { "name": "The Continuous Ledger Rule", "body": "Transaction and balance collections are bounded by shared horizontal dividers; rows are not individual cards.", "section": "layout" },
+      { "name": "The One Shadowed Phrase Rule", "body": "Only the hero’s outcome phrase receives the small blue line-shadow; never apply the effect to an entire heading or repeat it elsewhere on the page.", "section": "typography" },
+      { "name": "The Continuous Ledger Rule", "body": "Transaction, final-payment, and test-scenario collections are bounded by shared horizontal dividers; rows are not individual cards.", "section": "layout" },
       { "name": "The Direction Survives Compression Rule", "body": "Responsive changes may restack payer, beneficiary, and amount, but they may never remove the user’s ability to tell who owes whom.", "section": "layout" },
       { "name": "The Flat-by-Default Rule", "body": "Do not add shadows to ledger rows, content sections, inputs, or ordinary containers; use spacing and hairline borders first.", "section": "elevation" },
       { "name": "The Radius Has a Job Rule", "body": "Full pills signal actions, selection, or identity; medium corners signal fields and temporary surfaces. Do not round whole ledger sections simply to make them look like cards.", "section": "shapes" }
     ],
     "dos": [
       "Do reserve Action Blue for primary creation, focus, selection, and sparse informational cues.",
-      "Do state balances as a plain-language debtor-to-creditor relationship next to a tabular amount.",
+      "Do state final payments as a plain-language debtor-to-creditor relationship next to a tabular amount.",
       "Do use dividers, whitespace, and type hierarchy to structure the ledger.",
-      "Do test every responsive state in both English LTR and Persian RTL.",
+      "Do begin an unsaved visit in Persian RTL and light mode, then preserve explicit user choices.",
+      "Do test every responsive state, motion state, and directional connector in both English LTR and Persian RTL.",
       "Do preserve visible focus, semantic labels, keyboard tab behavior, focus trapping, and reduced-motion handling."
     ],
     "donts": [
-      "Don't wrap every transaction, balance, or informational section in a rounded card.",
+      "Don't wrap every transaction, final payment, scenario, or informational section in a rounded card.",
       "Don't use blue for active navigation, decorative emphasis, or competing secondary actions.",
       "Don't abbreviate debt direction into an ambiguous signed number or color-only indicator.",
+      "Don't call the computed group-wide result a balance when the user-facing concept is a final payment.",
+      "Don't animate lists, settlement-network particles, loader orbits, or theme reveals when reduced motion is requested.",
       "Don't introduce a second typeface, gratuitous gradients, heavy shadows, or glossy decoration.",
       "Don't implement RTL by mechanically mirroring every icon or by using physical left/right spacing."
     ]

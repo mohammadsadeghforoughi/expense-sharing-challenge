@@ -1,32 +1,32 @@
 'use client';
 
-import { Languages, Moon, Sun } from 'lucide-react';
+import { Languages } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getMessages } from '@/lib/i18n';
 import type { Locale } from '@/lib/types';
+import { AnimatedThemeToggler } from './ui/animated-theme-toggler';
 
 export function Header() {
   const pathname = usePathname();
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useState<Locale>('fa');
   const [dark, setDark] = useState(false);
   const t = getMessages(locale);
 
   useEffect(() => {
     const savedLocale = localStorage.getItem('settle-locale') as Locale | null;
-    const nextLocale = savedLocale === 'fa' ? 'fa' : 'en';
+    const nextLocale = savedLocale === 'en' ? 'en' : 'fa';
     setLocale(nextLocale);
     setDark(document.documentElement.classList.contains('dark'));
     document.documentElement.lang = nextLocale;
     document.documentElement.dir = nextLocale === 'fa' ? 'rtl' : 'ltr';
   }, []);
 
-  function toggleTheme() {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle('dark', next);
-    localStorage.setItem('settle-theme', next ? 'dark' : 'light');
+  function setTheme(nextTheme: 'light' | 'dark') {
+    const nextDark = nextTheme === 'dark';
+    setDark(nextDark);
+    localStorage.setItem('settle-theme', nextTheme);
   }
 
   function toggleLocale() {
@@ -52,7 +52,7 @@ export function Header() {
         </Link>
 
         <div className="flex items-center gap-1.5">
-          <nav aria-label="Primary" className="me-1 hidden items-center rounded-full bg-ink/[0.045] p-1 dark:bg-white/[0.06] sm:flex">
+          <nav aria-label={t.primaryNavLabel} className="me-1 hidden items-center rounded-full bg-ink/[0.045] p-1 dark:bg-white/[0.06] sm:flex">
             <Link
               href="/"
               className={`rounded-full px-4 py-1.5 text-sm transition-colors ${pathname === '/' ? 'bg-surface text-ink shadow-sm' : 'text-muted hover:text-ink'}`}
@@ -70,21 +70,14 @@ export function Header() {
             type="button"
             onClick={toggleLocale}
             aria-label={t.switchLanguage}
-            className="grid h-10 w-10 place-items-center rounded-full text-muted transition-colors hover:bg-ink/[0.055] hover:text-ink dark:hover:bg-white/[0.08]"
+            className="grid h-11 w-11 place-items-center rounded-full text-muted transition-colors hover:bg-ink/[0.055] hover:text-ink dark:hover:bg-white/[0.08]"
           >
             <Languages className="h-[19px] w-[19px]" strokeWidth={1.8} />
           </button>
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label={t.switchTheme}
-            className="grid h-10 w-10 place-items-center rounded-full text-muted transition-colors hover:bg-ink/[0.055] hover:text-ink dark:hover:bg-white/[0.08]"
-          >
-            {dark ? <Sun className="h-[19px] w-[19px]" strokeWidth={1.8} /> : <Moon className="h-[19px] w-[19px]" strokeWidth={1.8} />}
-          </button>
+          <AnimatedThemeToggler theme={dark ? 'dark' : 'light'} onThemeChange={setTheme} label={t.switchTheme} />
         </div>
       </div>
-      <nav aria-label="Mobile primary" className="mx-auto flex max-w-6xl gap-5 px-5 pb-2 text-sm sm:hidden">
+      <nav aria-label={t.mobileNavLabel} className="mx-auto flex max-w-6xl gap-5 px-5 pb-2 text-sm sm:hidden">
         <Link href="/" className={pathname === '/' ? 'text-ink' : 'text-muted'}>{t.expenses}</Link>
         <Link href="/about" className={pathname === '/about' ? 'text-ink' : 'text-muted'}>{t.about}</Link>
       </nav>
