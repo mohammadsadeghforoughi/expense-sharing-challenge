@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-28T12:27:58Z",
+  "title": "Design System: Settle",
+  "extensions": {
+    "colorMeta": {
+      "canvas-light": {
+        "role": "neutral",
+        "displayName": "Soft Canvas",
+        "canonical": "rgb(247 247 245)",
+        "tonalRamp": ["oklch(15% 0.004 95)", "oklch(27% 0.004 95)", "oklch(39% 0.004 95)", "oklch(51% 0.004 95)", "oklch(63% 0.004 95)", "oklch(75% 0.004 95)", "oklch(87% 0.004 95)", "oklch(95% 0.004 95)"]
+      },
+      "surface-light": {
+        "role": "neutral",
+        "displayName": "Clean Surface",
+        "canonical": "rgb(255 255 255)",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(95% 0 0)"]
+      },
+      "ink-light": {
+        "role": "neutral",
+        "displayName": "Ledger Ink",
+        "canonical": "rgb(28 28 30)",
+        "tonalRamp": ["oklch(15% 0.006 265)", "oklch(27% 0.006 265)", "oklch(39% 0.006 265)", "oklch(51% 0.006 265)", "oklch(63% 0.006 265)", "oklch(75% 0.006 265)", "oklch(87% 0.006 265)", "oklch(95% 0.006 265)"]
+      },
+      "muted-light": {
+        "role": "neutral",
+        "displayName": "Supporting Graphite",
+        "canonical": "rgb(99 99 104)",
+        "tonalRamp": ["oklch(15% 0.008 265)", "oklch(27% 0.008 265)", "oklch(39% 0.008 265)", "oklch(51% 0.008 265)", "oklch(63% 0.008 265)", "oklch(75% 0.008 265)", "oklch(87% 0.008 265)", "oklch(95% 0.008 265)"]
+      },
+      "line-light": {
+        "role": "neutral",
+        "displayName": "Hairline Divider",
+        "canonical": "rgb(224 224 221)",
+        "tonalRamp": ["oklch(15% 0.004 95)", "oklch(27% 0.004 95)", "oklch(39% 0.004 95)", "oklch(51% 0.004 95)", "oklch(63% 0.004 95)", "oklch(75% 0.004 95)", "oklch(87% 0.004 95)", "oklch(95% 0.004 95)"]
+      },
+      "accent-light": {
+        "role": "primary",
+        "displayName": "Action Blue",
+        "canonical": "rgb(34 113 246)",
+        "tonalRamp": ["oklch(15% 0.16 255)", "oklch(27% 0.16 255)", "oklch(39% 0.16 255)", "oklch(51% 0.16 255)", "oklch(63% 0.16 255)", "oklch(75% 0.16 255)", "oklch(87% 0.16 255)", "oklch(95% 0.16 255)"]
+      },
+      "canvas-dark": {
+        "role": "neutral",
+        "displayName": "Night Canvas",
+        "canonical": "rgb(16 16 17)",
+        "tonalRamp": ["oklch(15% 0.006 265)", "oklch(27% 0.006 265)", "oklch(39% 0.006 265)", "oklch(51% 0.006 265)", "oklch(63% 0.006 265)", "oklch(75% 0.006 265)", "oklch(87% 0.006 265)", "oklch(95% 0.006 265)"]
+      },
+      "surface-dark": {
+        "role": "neutral",
+        "displayName": "Raised Graphite",
+        "canonical": "rgb(28 28 30)",
+        "tonalRamp": ["oklch(15% 0.006 265)", "oklch(27% 0.006 265)", "oklch(39% 0.006 265)", "oklch(51% 0.006 265)", "oklch(63% 0.006 265)", "oklch(75% 0.006 265)", "oklch(87% 0.006 265)", "oklch(95% 0.006 265)"]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Night Ink",
+        "canonical": "rgb(245 245 247)",
+        "tonalRamp": ["oklch(15% 0.006 265)", "oklch(27% 0.006 265)", "oklch(39% 0.006 265)", "oklch(51% 0.006 265)", "oklch(63% 0.006 265)", "oklch(75% 0.006 265)", "oklch(87% 0.006 265)", "oklch(95% 0.006 265)"]
+      },
+      "muted-dark": {
+        "role": "neutral",
+        "displayName": "Night Graphite",
+        "canonical": "rgb(174 174 181)",
+        "tonalRamp": ["oklch(15% 0.01 265)", "oklch(27% 0.01 265)", "oklch(39% 0.01 265)", "oklch(51% 0.01 265)", "oklch(63% 0.01 265)", "oklch(75% 0.01 265)", "oklch(87% 0.01 265)", "oklch(95% 0.01 265)"]
+      },
+      "line-dark": {
+        "role": "neutral",
+        "displayName": "Night Divider",
+        "canonical": "rgb(55 55 58)",
+        "tonalRamp": ["oklch(15% 0.007 265)", "oklch(27% 0.007 265)", "oklch(39% 0.007 265)", "oklch(51% 0.007 265)", "oklch(63% 0.007 265)", "oklch(75% 0.007 265)", "oklch(87% 0.007 265)", "oklch(95% 0.007 265)"]
+      },
+      "accent-dark": {
+        "role": "primary",
+        "displayName": "Night Action Blue",
+        "canonical": "rgb(64 140 255)",
+        "tonalRamp": ["oklch(15% 0.16 255)", "oklch(27% 0.16 255)", "oklch(39% 0.16 255)", "oklch(51% 0.16 255)", "oklch(63% 0.16 255)", "oklch(75% 0.16 255)", "oklch(87% 0.16 255)", "oklch(95% 0.16 255)"]
+      },
+      "error-wash": {
+        "role": "tertiary",
+        "displayName": "Error Wash",
+        "canonical": "rgb(239 68 68 / 0.1)",
+        "tonalRamp": ["oklch(15% 0.14 25)", "oklch(27% 0.14 25)", "oklch(39% 0.14 25)", "oklch(51% 0.14 25)", "oklch(63% 0.14 25)", "oklch(75% 0.14 25)", "oklch(87% 0.14 25)", "oklch(95% 0.14 25)"]
+      },
+      "error-light": {
+        "role": "tertiary",
+        "displayName": "Error Text",
+        "canonical": "rgb(185 28 28)",
+        "tonalRamp": ["oklch(15% 0.14 25)", "oklch(27% 0.14 25)", "oklch(39% 0.14 25)", "oklch(51% 0.14 25)", "oklch(63% 0.14 25)", "oklch(75% 0.14 25)", "oklch(87% 0.14 25)", "oklch(95% 0.14 25)"]
+      },
+      "error-dark": {
+        "role": "tertiary",
+        "displayName": "Night Error Text",
+        "canonical": "rgb(252 165 165)",
+        "tonalRamp": ["oklch(15% 0.14 25)", "oklch(27% 0.14 25)", "oklch(39% 0.14 25)", "oklch(51% 0.14 25)", "oklch(63% 0.14 25)", "oklch(75% 0.14 25)", "oklch(87% 0.14 25)", "oklch(95% 0.14 25)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "One page-level statement with compact leading and quiet authority." },
+      "headline": { "displayName": "Headline", "purpose": "Primary section headings such as Activity and Current balances." },
+      "title": { "displayName": "Title", "purpose": "Dialog titles and strong secondary headings." },
+      "body": { "displayName": "Body", "purpose": "Readable descriptions, guidance, and explanatory content." },
+      "label": { "displayName": "Label", "purpose": "Buttons, tabs, fields, utility controls, and navigation." }
+    },
+    "shadows": [
+      { "name": "modal-lift", "value": "0 24px 64px -24px rgba(0, 0, 0, 0.28)", "purpose": "Broad ambient separation for the add-expense dialog only." },
+      { "name": "create-glow", "value": "0 8px 24px -12px rgba(34, 113, 246, 0.85)", "purpose": "Restrained blue presence beneath the primary create action." },
+      { "name": "selected-tab", "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)", "purpose": "Minimal lift for the selected item inside a segmented control." },
+      { "name": "flow-chip", "value": "0 4px 16px -12px rgba(0, 0, 0, 0.45)", "purpose": "Barely perceptible separation for architecture flow nodes." }
+    ],
+    "motion": [
+      { "name": "ease-apple", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Gentle deceleration for modal entry and primary-action lift." },
+      { "name": "duration-standard", "value": "300ms", "purpose": "Default duration for meaningful hover transformations." },
+      { "name": "duration-modal", "value": "360ms", "purpose": "Dialog fade, rise, and subtle scale-in." },
+      { "name": "reduced-motion", "value": "0.01ms", "purpose": "Effective animation and transition duration when reduced motion is requested." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Create Expense Button",
+      "kind": "button",
+      "refersTo": "button-create",
+      "description": "The one blue page action; opens the short add-expense task.",
+      "html": "<button class=\"ds-btn-create\" type=\"button\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg><span>Add expense</span></button>",
+      "css": ".ds-btn-create { display:inline-flex; height:48px; align-items:center; justify-content:center; gap:8px; border:0; border-radius:999px; padding:0 20px; background:rgb(var(--accent, 34 113 246)); color:#fff; font:500 16px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; box-shadow:0 8px 24px -12px rgba(34,113,246,.85); cursor:pointer; transition:background-color 300ms,transform 300ms cubic-bezier(.16,1,.3,1); } .ds-btn-create svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; } .ds-btn-create:hover { background:rgb(var(--accent, 34 113 246)/.9); transform:translateY(-2px); } .ds-btn-create:active { transform:translateY(0); } .ds-btn-create:focus-visible { outline:3px solid rgb(var(--accent, 34 113 246)/.45); outline-offset:2px; } @media (prefers-reduced-motion:reduce) { .ds-btn-create { transition-duration:.01ms; } }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "description": "A quiet segmented desktop navigation whose active destination uses surface, not accent.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a class=\"ds-nav-item ds-nav-active\" href=\"#\">Expenses</a><a class=\"ds-nav-item\" href=\"#\">About</a></nav>",
+      "css": ".ds-nav { display:inline-flex; align-items:center; gap:0; border-radius:999px; padding:4px; background:rgb(var(--ink, 28 28 30)/.045); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-nav-item { border-radius:999px; padding:6px 16px; color:rgb(var(--muted, 99 99 104)); font-size:14px; line-height:1.5; text-decoration:none; transition:color 150ms,background-color 150ms; } .ds-nav-item:hover { color:rgb(var(--ink, 28 28 30)); } .ds-nav-item:focus-visible { outline:3px solid rgb(var(--accent, 34 113 246)/.45); outline-offset:2px; } .ds-nav-active { background:rgb(var(--surface, 255 255 255)); color:rgb(var(--ink, 28 28 30)); box-shadow:0 1px 2px rgb(0 0 0/.05); }"
+    },
+    {
+      "name": "Ledger View Tabs",
+      "kind": "chip",
+      "refersTo": "tab-active",
+      "description": "Keyboard-operable segmented tabs for switching between transactions and net balances.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\" aria-label=\"Ledger view\"><button class=\"ds-tab ds-tab-active\" role=\"tab\" aria-selected=\"true\">Expenses <span>12</span></button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\">Balances <span>3</span></button></div>",
+      "css": ".ds-tabs { display:inline-flex; align-items:center; border-radius:999px; padding:4px; background:rgb(var(--ink, 28 28 30)/.055); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-tab { border:0; border-radius:999px; padding:8px 16px; background:transparent; color:rgb(var(--muted, 99 99 104)); font-size:14px; font-weight:500; line-height:1.5; cursor:pointer; transition:color 150ms,background-color 150ms,box-shadow 150ms; } .ds-tab span { margin-inline-start:8px; color:rgb(var(--muted, 99 99 104)); font-variant-numeric:tabular-nums; } .ds-tab:hover { color:rgb(var(--ink, 28 28 30)); } .ds-tab:focus-visible { outline:3px solid rgb(var(--accent, 34 113 246)/.45); outline-offset:2px; } .ds-tab-active { background:rgb(var(--surface, 255 255 255)); color:rgb(var(--ink, 28 28 30)); box-shadow:0 1px 2px rgb(0 0 0/.05); }"
+    },
+    {
+      "name": "Expense Ledger Row",
+      "kind": "custom",
+      "description": "A border-led transaction row that keeps payer, beneficiary, date, and amount in one readable line of evidence.",
+      "html": "<article class=\"ds-expense-row\"><span class=\"ds-avatar\" aria-hidden=\"true\">AM</span><div class=\"ds-expense-copy\"><strong>Dinner</strong><p>Arman paid for Sara · Sep 28, 2026</p></div><data class=\"ds-expense-amount\" value=\"42\">$42</data></article>",
+      "css": ".ds-expense-row { display:grid; grid-template-columns:40px minmax(0,1fr) auto; align-items:center; gap:16px; border-block:1px solid rgb(var(--line, 224 224 221)); padding:24px 0; color:rgb(var(--ink, 28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-avatar { display:grid; width:40px; height:40px; place-items:center; border-radius:999px; background:#7c3aed; color:#fff; font-size:12px; font-weight:600; } .ds-expense-copy { min-width:0; } .ds-expense-copy strong { display:block; overflow:hidden; font-size:16px; font-weight:500; text-overflow:ellipsis; white-space:nowrap; } .ds-expense-copy p { margin:4px 0 0; color:rgb(var(--muted, 99 99 104)); font-size:14px; line-height:1.5; } .ds-expense-amount { font-size:18px; font-weight:600; letter-spacing:-.015em; font-variant-numeric:tabular-nums; text-align:end; }"
+    },
+    {
+      "name": "Plain-Language Balance Row",
+      "kind": "custom",
+      "description": "The signature balance treatment: paired identity, an explicit owes relationship, and a stable amount.",
+      "html": "<article class=\"ds-balance-row\" dir=\"auto\"><div class=\"ds-avatar-pair\" aria-hidden=\"true\"><span class=\"ds-avatar ds-debtor\">SA</span><span class=\"ds-avatar ds-creditor\">AM</span></div><p><strong>Sara</strong> <span>owes</span> <strong>Arman</strong></p><data value=\"18.5\">$18.50</data></article>",
+      "css": ".ds-balance-row { display:flex; align-items:center; gap:20px; border-block:1px solid rgb(var(--line, 224 224 221)); padding:24px 0; color:rgb(var(--ink, 28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-avatar-pair { display:flex; margin-inline-end:4px; } .ds-avatar-pair .ds-avatar { display:grid; width:40px; height:40px; place-items:center; border-radius:999px; color:#fff; font-size:12px; font-weight:600; } .ds-avatar-pair .ds-avatar + .ds-avatar { margin-inline-start:-8px; box-shadow:0 0 0 4px rgb(var(--canvas, 247 247 245)); } .ds-debtor { background:#d97706; } .ds-creditor { background:#2563eb; } .ds-balance-row p { min-width:0; flex:1; margin:0; font-size:16px; } .ds-balance-row p strong { font-weight:600; } .ds-balance-row p span { margin-inline:6px; color:rgb(var(--muted, 99 99 104)); } .ds-balance-row data { flex:none; font-size:20px; font-weight:600; letter-spacing:-.015em; font-variant-numeric:tabular-nums; text-align:end; }"
+    },
+    {
+      "name": "Ledger Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "A softly inset field whose blue focus ring is its only strong state color.",
+      "html": "<label class=\"ds-field\"><span>Description</span><input type=\"text\" placeholder=\"e.g. Dinner\" /></label>",
+      "css": ".ds-field { display:block; color:rgb(var(--ink, 28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-field > span { display:block; margin-block-end:8px; font-size:14px; font-weight:500; line-height:1.5; } .ds-field input { width:100%; height:48px; border:0; border-radius:12px; padding:0 16px; background:rgb(var(--canvas, 247 247 245)); color:rgb(var(--ink, 28 28 30)); font:400 16px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; box-shadow:inset 0 0 0 1px rgb(var(--line, 224 224 221)); outline:none; transition:box-shadow 150ms; } .ds-field input::placeholder { color:rgb(var(--muted, 99 99 104)/.82); } .ds-field input:focus { box-shadow:inset 0 0 0 2px rgb(var(--accent, 34 113 246)); } .ds-field input:focus-visible { outline:3px solid rgb(var(--accent, 34 113 246)/.45); outline-offset:2px; }"
+    },
+    {
+      "name": "Add Expense Dialog",
+      "kind": "custom",
+      "refersTo": "modal",
+      "description": "A calm temporary surface that places debt direction before amount and description.",
+      "html": "<section class=\"ds-modal\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"ds-modal-title\"><header><h2 id=\"ds-modal-title\">Add expense</h2><button aria-label=\"Close\">×</button></header><form><div class=\"ds-direction\"><label>Paid by<select><option>Arman</option></select></label><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg><label>Expense for<select><option>Sara</option></select></label></div><p>The selected person will owe the payer this amount.</p><footer><button class=\"ds-cancel\" type=\"button\">Cancel</button><button class=\"ds-save\" type=\"submit\">Save expense</button></footer></form></section>",
+      "css": ".ds-modal { width:min(100%,512px); overflow:hidden; border-radius:16px; background:rgb(var(--surface, 255 255 255)); color:rgb(var(--ink, 28 28 30)); font-family:Anjoman,ui-sans-serif,system-ui,sans-serif; box-shadow:0 24px 64px -24px rgba(0,0,0,.28); animation:ds-modal-in 360ms cubic-bezier(.16,1,.3,1) both; } .ds-modal header { display:flex; align-items:center; justify-content:space-between; border-block-end:1px solid rgb(var(--line, 224 224 221)); padding:16px 24px; } .ds-modal h2 { margin:0; font-size:20px; font-weight:600; letter-spacing:-.02em; } .ds-modal header button { display:grid; width:36px; height:36px; place-items:center; border:0; border-radius:999px; background:rgb(var(--ink, 28 28 30)/.055); color:rgb(var(--muted, 99 99 104)); font-size:22px; cursor:pointer; } .ds-modal form { padding:24px; } .ds-direction { display:grid; grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr); align-items:end; gap:12px; } .ds-direction label { min-width:0; font-size:14px; font-weight:500; } .ds-direction select { display:block; width:100%; height:48px; margin-block-start:8px; border:0; border-radius:12px; padding:0 16px; background:rgb(var(--canvas, 247 247 245)); color:rgb(var(--ink, 28 28 30)); box-shadow:inset 0 0 0 1px rgb(var(--line, 224 224 221)); font:400 16px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; } .ds-direction svg { width:20px; height:20px; margin-block-end:14px; fill:none; stroke:rgb(var(--muted, 99 99 104)); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; } .ds-modal form > p { margin:12px 0 20px; color:rgb(var(--muted, 99 99 104)); font-size:12px; line-height:1.65; } .ds-modal footer { display:flex; justify-content:flex-end; gap:8px; } .ds-modal footer button { height:44px; border:0; border-radius:999px; padding:0 20px; font:500 14px/1.5 Anjoman,ui-sans-serif,system-ui,sans-serif; cursor:pointer; } .ds-cancel { background:transparent; color:rgb(var(--muted, 99 99 104)); } .ds-cancel:hover { background:rgb(var(--ink, 28 28 30)/.055); color:rgb(var(--ink, 28 28 30)); } .ds-save { background:rgb(var(--accent, 34 113 246)); color:#fff; } .ds-save:hover { background:rgb(var(--accent, 34 113 246)/.9); } .ds-modal button:focus-visible,.ds-modal select:focus-visible { outline:3px solid rgb(var(--accent, 34 113 246)/.45); outline-offset:2px; } @keyframes ds-modal-in { from { opacity:0; transform:translateY(16px) scale(.98); } to { opacity:1; transform:translateY(0) scale(1); } } @media (prefers-reduced-motion:reduce) { .ds-modal { animation-duration:.01ms; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Shared Ledger",
+    "overview": "Settle should feel like a small, trustworthy record lying open on a calm desk: direct, legible, and free of accounting theater. Its Apple-like restraint comes from generous whitespace, precise type, native-feeling controls, and a neutral material system rather than ornamental surfaces. The interface operates at a comfortable density, with one strong action and no competing accents.\n\nEvery expense is a directional relationship, so payer, beneficiary, arrow, and amount form the visual anchor. Balances translate the same relationship into plain language instead of presenting abstract totals. English and Persian are equal expressions of the same system: layout uses logical properties, icons reverse when direction carries meaning, and numeral-heavy data remains stable and scannable in either direction.",
+    "keyCharacteristics": [
+      "Quiet neutral canvases with a single purposeful blue action color",
+      "Large, tightly tracked headings balanced by highly readable body copy",
+      "Border-led ledger structure instead of nested cards",
+      "Explicit directional relationships and tabular financial numerals",
+      "Pill-shaped actions and selectors with softly rounded fields and dialogs",
+      "Responsive LTR/RTL behavior with native-feeling accessibility states"
+    ],
+    "rules": [
+      { "name": "The One Blue Action Rule", "body": "Blue identifies creation, focus, and the occasional informational cue; it must not become a general decoration or compete across multiple actions.", "section": "colors" },
+      { "name": "The Theme Pair Rule", "body": "Always consume semantic theme pairs together; never hard-code a light neutral into a dark surface or treat dark mode as an inverted afterthought.", "section": "colors" },
+      { "name": "The One Typeface Rule", "body": "Keep English, Persian, labels, amounts, and narrative text in Anjoman; hierarchy comes from scale, weight, spacing, and color rather than a second typeface.", "section": "typography" },
+      { "name": "The Financial Numeral Rule", "body": "Amounts and count-bearing UI use tabular numerals so changing values never disturb alignment.", "section": "typography" },
+      { "name": "The Continuous Ledger Rule", "body": "Transaction and balance collections are bounded by shared horizontal dividers; rows are not individual cards.", "section": "layout" },
+      { "name": "The Direction Survives Compression Rule", "body": "Responsive changes may restack payer, beneficiary, and amount, but they may never remove the user’s ability to tell who owes whom.", "section": "layout" },
+      { "name": "The Flat-by-Default Rule", "body": "Do not add shadows to ledger rows, content sections, inputs, or ordinary containers; use spacing and hairline borders first.", "section": "elevation" },
+      { "name": "The Radius Has a Job Rule", "body": "Full pills signal actions, selection, or identity; medium corners signal fields and temporary surfaces. Do not round whole ledger sections simply to make them look like cards.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do reserve Action Blue for primary creation, focus, selection, and sparse informational cues.",
+      "Do state balances as a plain-language debtor-to-creditor relationship next to a tabular amount.",
+      "Do use dividers, whitespace, and type hierarchy to structure the ledger.",
+      "Do test every responsive state in both English LTR and Persian RTL.",
+      "Do preserve visible focus, semantic labels, keyboard tab behavior, focus trapping, and reduced-motion handling."
+    ],
+    "donts": [
+      "Don't wrap every transaction, balance, or informational section in a rounded card.",
+      "Don't use blue for active navigation, decorative emphasis, or competing secondary actions.",
+      "Don't abbreviate debt direction into an ambiguous signed number or color-only indicator.",
+      "Don't introduce a second typeface, gratuitous gradients, heavy shadows, or glossy decoration.",
+      "Don't implement RTL by mechanically mirroring every icon or by using physical left/right spacing."
+    ]
+  }
+}

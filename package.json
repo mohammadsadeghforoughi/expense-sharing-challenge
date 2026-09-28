@@ -1,0 +1,19 @@
+{
+  "name": "expense-sharing-challenge",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm run start:dev -w @expense/api\" \"npm run dev -w @expense/web\"",
+    "build": "npm run build -w @expense/api && npm run build -w @expense/web",
+    "lint": "npm run lint -w @expense/api && npm run lint -w @expense/web",
+    "test": "npm run test -w @expense/api",
+    "start": "concurrently -n api,web -c blue,green \"npm run start:prod -w @expense/api\" \"npm run start -w @expense/web\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
